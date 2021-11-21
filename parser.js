@@ -4,7 +4,7 @@ const builtIn = require('./builtin.js');
 
 /**
  * The main parser class.
- * @
+ * @param {object} - options, controls the parser
  */
 class Parser {
 	constructor(options = {}) {
@@ -19,6 +19,7 @@ class Parser {
 		// we modify this in a for loop, and return this modified string
 		let finalTag = string;
 		for(const Tag of parsedTags) {
+			// strip off the {}
 			let tag = Tag.slice(1, -1);
 			// strip extra spaces so name does not get messed up in the context
 			tag = stripIndents(tag);
@@ -60,11 +61,17 @@ class Parser {
 		// strip all the whitespace and beautify the string and return it
 		return stripIndents(finalTag);
 	}
+	/**
+	 * Get a new Context with only built in functions
+	 * @param {object} additionalCtx - additional ctx to merge with global context
+	 */
 	getNewCtx(additionalCtx = {}) {
+		// merge the builtin functions and user provided ctx
 		const newCtx = merge({
 			functions: {...builtIn.functions},
 			variables: {...builtIn.variables}
 		}, additionalCtx);
+		// merge the global and the above modified context
 		const ctx = merge(this.ctx, newCtx);
 
 		return {

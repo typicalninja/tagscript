@@ -1,2 +1,7 @@
 /node_modules
 /test.js
+/webpack.config.js
+/tsconfig.json
+/utils.js
+/dist
+/parser.js

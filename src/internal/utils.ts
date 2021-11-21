@@ -1,8 +1,8 @@
-const isObject = (object) => {
+const isObject = (object: any) => {
 	return !!object && typeof object === 'object';
 }
 // deep merges something mostly a object with some internal values
-const merge = (target, source) => {
+const merge = (target: any, source: any) => {
 	if (!isObject(target) || !isObject(source)) {
 	  return source;
 	}
@@ -25,7 +25,7 @@ const merge = (target, source) => {
 
 
 // removes new lines "\n" of a string
-const removeNewLines = (string) => {
+const removeNewLines = (string: string) => {
 	return string.replace(/\n/g, '');
 }
 
@@ -33,7 +33,7 @@ const removeNewLines = (string) => {
 // strips indent from a string
 // behaves like common-tags' stripIndents
 // removes every whitespace from a string
-const stripIndents = (text) => {
+const stripIndents = (text: any) => {
 		if (typeof text !== 'string') {
 			text = String(text);
 		}
@@ -41,17 +41,21 @@ const stripIndents = (text) => {
 }
 
 
-module.exports = {
-	merge: merge,
-	isString: (str) => /"(.*?)"/gi.test(str),
-	stripIndents: stripIndents,
-	cleanString: (string) => {
+const cleanString = (string: any) => {
 		if (typeof string !== 'string') {
 			string = String(string);
 		}
 		string = removeNewLines(string);
 		string = stripIndents(string);
 		return string;
-	},
+}
 
+
+
+export {
+	isObject,
+	merge,
+	removeNewLines,
+	stripIndents,
+	cleanString
 }
