@@ -1,5 +1,6 @@
 /**
  * Only returns the TYPE for a expr
+ * Belongs to the parser
  */
 
 import { exp_types } from "../constants";

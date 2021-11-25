@@ -1,14 +1,22 @@
+/**
+ * Runner, interpret and runs the object returned from
+ * ./types hold utils for Runner class
+ */
+
 import Parser from "../../parser";
 import { stripIndents } from 'common-tags'
-import { exp_types } from "../constants";
 import { default as getHandler } from './types/index'
+import { exp_types } from "../constants";
+import { makeString } from "./types/string";
 
 class Runner {
-	ctx: any;
+	ctx: {
+		[key: string]: string
+	};
 	data: any;
 	parser: Parser;
 	original: string;
-	constructor(data: any, ctx: any, original: string, parser: Parser) {
+	constructor(data: any, ctx: { [key: string]: string }, original: string, parser: Parser) {
 		this.ctx = ctx;
 		this.data = data;
 		this.parser = parser;
@@ -20,18 +28,9 @@ class Runner {
 			const templateToBeReplaced = template.raw;
 			const type = template.data.type;
 			let result = ''
-			let handler = null
-			console.log(template.data)
-			switch(type) {
-				case exp_types.declaration: 
-					 handler = getHandler(type)
-				break;
-				case exp_types.variables:
-					handler = getHandler(type)
-				break;
-			}
-
-			result = await handler(this.ctx, template.data, this)
+			let handler = getHandler(type)
+			result = await handler(this.ctx, template.data, this);
+			if(type == exp_types.string || type == exp_types.variables) result = makeString(this.ctx, result)
 			final = final.replace(templateToBeReplaced, result || '')
 		}
 		return stripIndents(stripIndents(final));

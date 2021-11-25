@@ -1,9 +1,12 @@
-# tagscript
+> this is the beta branch
+
+# tagscript/beta
 
 > Tagscript is mainly made for below use case.
 
 * Discord bots Custom command / tags system (allow users to run a simple understandable scripts)
 
+* Inspired by [JonSnowbd/TagScripScript](https://github.com/JonSnowbd/TagScript)
 # Install
 
 ```

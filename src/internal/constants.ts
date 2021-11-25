@@ -1,8 +1,5 @@
 export const defaultOptions = {
-	globalCtx: {
-		functions: {},
-		variables: {},
-	},
+	globalCtx: {},
 	throwError: false,
 }
 

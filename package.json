@@ -1,7 +1,7 @@
 {
   "name": "@typicalninja21/tagscript",
   "version": "1.0.0",
-  "description": "a miniature programming language... wait what",
+  "description": "easy to use Templating system, mainly user customizable systems",
   "main": "parser.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   "dependencies": {
     "common-tags": "^1.8.2",
     "expr-eval": "^2.0.2",
+    "tslib": "^2.3.1",
     "vm2": "^3.9.5"
   },
   "devDependencies": {
