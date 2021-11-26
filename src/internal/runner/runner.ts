@@ -1,13 +1,13 @@
 /**
- * Runner, interpret and runs the object returned from
- * ./types hold utils for Runner class
+ * Runner, interpret and runs the object returned from parsing
+ * ./handlers old the handlers for different types of expr
  */
 
 import Parser from "../../parser";
 import { stripIndents } from 'common-tags'
-import { default as getHandler } from './types/index'
+import { default as getHandler } from './handlers/index'
 import { exp_types } from "../constants";
-import { makeString } from "./types/string";
+import { makeString } from "./handlers/string";
 
 class Runner {
 	ctx: {
@@ -27,10 +27,10 @@ class Runner {
 		for(const template of this.data.templates) {
 			const templateToBeReplaced = template.raw;
 			const type = template.data.type;
-			let result = ''
+			let result: string | null = ''
 			let handler = getHandler(type)
 			result = await handler(this.ctx, template.data, this);
-			if(type == exp_types.string || type == exp_types.variables) result = makeString(this.ctx, result)
+			if(type == exp_types.string || type == exp_types.variables) result = makeString(this.ctx, result as string)
 			final = final.replace(templateToBeReplaced, result || '')
 		}
 		return stripIndents(stripIndents(final));

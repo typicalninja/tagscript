@@ -2,10 +2,11 @@
  * Runner : Handler for variables
  */
 
-import Runner from "..";
+import Runner from "../runner";
 import util from 'util';
 import { exp_types } from "../../constants";
 import { makeString } from "./string";
+import { default as getHandler } from './index';
 
 export const accessVariables = (ctx: { [key: string]: string | undefined } | undefined | string, runner: Runner, variables: string[]) => {
 	let c = ctx;
@@ -25,7 +26,7 @@ export const accessVariables = (ctx: { [key: string]: string | undefined } | und
 	return c;
 }
 
-export const handler_DEC = (ctx: { [key: string]: string | undefined } | undefined | string, varData: any, runner: Runner) => {
+export const handler_DEC = async (ctx: { [key: string]: string | undefined } | undefined | string, varData: any, runner: Runner) => {
 	let c = ctx;
 	let construct = '';
 	let i = 0;
@@ -33,7 +34,7 @@ export const handler_DEC = (ctx: { [key: string]: string | undefined } | undefin
 		const type = vals.type;
 		construct += i == 0 ? varData.name : '.' + varData.name
 		i++
-		if(c == undefined || c == null) throw new Error(`Cannot set values to ${c == undefined ? 'undefined' : 'null'} (Settings ${varData.name} of ${construct})`)
+		if(c == undefined || c == null) return runner.throwError(`Cannot set values to ${c == undefined ? 'undefined' : 'null'} (Settings ${varData.name} of ${construct})`)
 
 		switch(type) {
 			case exp_types.string:
@@ -42,8 +43,26 @@ export const handler_DEC = (ctx: { [key: string]: string | undefined } | undefin
 			break;
 			case exp_types.variables:
 				const variable = accessVariables(ctx, runner, vals.variableAccess);
-						// @ts-ignore
-				c[vals.name] = variable;
+					
+				Object.defineProperty(c, varData.name, {
+					value: variable,
+					enumerable: true,
+					configurable: true,
+					writable: true,
+				});
+			break;
+			case exp_types.function_withParams:
+			case exp_types.function_withoutParams:
+				const handler = getHandler(type)
+				//console.log('ty:', type, vals, c, varData.name)
+
+				Object.defineProperty(c, varData.name, {
+					value: await handler(ctx, vals, runner) || null,
+					enumerable: true,
+					configurable: true,
+					writable: true,
+				});
+				//console.log('d:', c)
 			break;
 		}
 		if(type == exp_types.string) return '';

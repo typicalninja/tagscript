@@ -2,7 +2,7 @@ const createError = (errorName: string) => {
 	return class CustomError extends Error {
 		constructor(functionName: string, msg: string) {
 			super(msg)
-			this.name = `${functionName}-[${errorName}]`
+			this.name = `${errorName}-[${functionName}]`
 		}
 	}
 }
