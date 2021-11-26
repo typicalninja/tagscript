@@ -30,7 +30,7 @@ class Runner {
 			let result: string | null = ''
 			let handler = getHandler(type)
 			result = await handler(this.ctx, template.data, this);
-			if(type == exp_types.string || type == exp_types.variables) result = makeString(this.ctx, result as string)
+			if(type == exp_types.string || type == exp_types.variables) result = makeString(this.ctx, result as string, this)
 			final = final.replace(templateToBeReplaced, result || '')
 		}
 		return stripIndents(stripIndents(final));

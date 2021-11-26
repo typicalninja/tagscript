@@ -1,3 +1,7 @@
+/**
+ * Handler for functions, parser arguments and calls functions
+ */
+
 import { exp_types } from "../../constants"
 import Runner from "../runner"
 import { makeString } from "./string";
@@ -12,7 +16,7 @@ export const parseArguments = async (ctx: any, args: any[], runner: Runner) => {
 		switch(type) {
 			case exp_types.string:
 				// if type == string then just assign the value without any changes (use makeString as normal)
-				result = makeString(ctx, arg.name)
+				result = makeString(ctx, arg.name, runner)
 			break;
 			case exp_types.variables:
 				// get the value of the variable
