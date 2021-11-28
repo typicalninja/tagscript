@@ -33,7 +33,7 @@ class Runner {
 			if(type == exp_types.string || type == exp_types.variables) result = makeString(this.ctx, result as string, this)
 			final = final.replace(templateToBeReplaced, result || '')
 		}
-		return stripIndents(stripIndents(final));
+		return stripIndents(final);
 	}
 	throwError(msg: string) {
 		return this.parser.throwError(msg)

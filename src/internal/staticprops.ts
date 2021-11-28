@@ -1,15 +1,12 @@
+/**
+ * Generate a Object with props for the runner to parser and interpret
+ */
 import { templateRegex } from "./constants"
 import { getTypes, getData } from './types/index';
 import { cleanString } from "./utils";
 
 const applyDefaultData = (obj: Object, str: string) => {
 	Object.defineProperties(obj, {
-		size: {
-			value: str.length,
-			enumerable: true,
-			writable: false,
-			configurable: false
-		},
 		raw: {
 			value: cleanString(str),
 			enumerable: true,
@@ -27,7 +24,11 @@ const applyDefaultData = (obj: Object, str: string) => {
 	return obj;
 }
 
-export default (str: string) => {
+/**
+ * Generate a Object with props for the runner to parser and interpret
+ * The object returned will be unique between different expression's but same every time for every expression
+ */
+export default (str: string): { raw: string; templates: { raw: string; exp: string; type: string; data: any }[] } => {
 	// create a object
 	const dat = Object.create(null);
 	applyDefaultData(dat, str);

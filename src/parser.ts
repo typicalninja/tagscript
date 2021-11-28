@@ -1,10 +1,10 @@
 import { defaultOptions } from './internal/constants';
 import { merge } from './internal/utils';
-import { default as Data_gen } from './internal/dat.gen'
+import { default as getStaticProps } from './internal/staticprops'
 import { ValidationError } from './internal/errors';
 import Runner from './internal/runner/runner';
 
-interface parserOption {
+interface parserOptions {
 	globalCtx: {
 		[key: string]: string
 	},
@@ -16,13 +16,14 @@ interface parserOption {
 
 /**
  * Main parser
+ * @param options - options for the parser
  */
 class Parser {
-	options: parserOption
+	options: parserOptions
 	globalCtx: {
 		[key: string]: string
 	}
-	constructor(options: parserOption) {
+	constructor(options: parserOptions) {
 		/**
 		 * Options for the parser
 		 */
@@ -189,13 +190,14 @@ class Parser {
 			/**
 			 * Parse a String with this context
 			 * @param str - string to parse
+			 * @param staticProps - Since static props will be same for each expression, you can store the staticProp object and provide it with the parse function to stop parser wasting time to generate one
 			 * @returns 
 			 * @example
 			 * ```ts
 			 * ctx.parse('script').then(console.log)
 			 * ```
 			 */
-			parse: (str: string) => Parser.parse(str, ctx, this),
+			parse: (str: string, staticProps: any = null) => Parser.parse(str, ctx, staticProps, this),
 			/**
 			 * The actual new ctx
 			 */
@@ -203,15 +205,22 @@ class Parser {
 		}
 	}
 	/**
-	 * Parses given string and returns the formatted string. better to use [getNewCtx()](@link {getNewCtx})
+	 * Parses given string and returns the formatted string. better to use {@link getNewCtx}
 	 * @param str - string to parse
 	 * @param ctx - the context object for this script
-	 * @param parser - the parser this function belongs too
+	 * @param staticProps - Since static props will be same for each expression, you can store the staticProp object and provide it with the parse function to stop parser wasting time to generate one
+	 * @param parser - the parser this function belongs to
 	 */
-	public static async parse(str: string, ctx: { [key: string]: string }, thisContext: Parser) {
+	public static async parse(str: string, ctx: { [key: string]: string }, staticProps: any = null,  thisContext: Parser) {
 		if(typeof str !== 'string') throw new ValidationError('parse()', 'str must be a string');
+		let data = staticProps;
+		if(!staticProps) {
+			// user didn't provide any staticProps, get one ourselves
+		//	data = getStaticProps(str);
+		}
 		const original = str;
-		const data = Data_gen(str);
+		// no need to run the data through a runner if there is no templates
+		if(!data.templates.length) return str;
 		// start a new Runner and run it 
 		return await (new Runner(data, ctx, original, thisContext)).run()
 	}

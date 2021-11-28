@@ -5,12 +5,33 @@
 import { Parser } from "."
 import { version } from './package.json'
 
+let math = (_: any) => '1'
+
+try {
+	// import expr-eval parser
+	const Parser = require('expr-eval')?.Parser;
+	math = (new Parser()).evaluate;
+} catch {}
+
 
 const Functions: { [key: string]: (ctx: any, args: any[]) => string } = {
 	choose: (_: any, args: any[]) => {
 		return String(args[Math.floor(Math.random() * args.length)])
 	},
-
+	math: (_: any, args: any[]) => {
+		if(args.length > 1) {
+			const joined = args.join(' ')
+			try { return math(joined) } catch { return ' ' }
+		}
+		else if(args[0]) {
+			try { 
+				return math(args[0]) 
+			} catch { return '' }
+		}
+		else {
+			return ''
+		}
+	}
 }
 
 const Variables: { [key: string]: string | {} } = {
@@ -49,7 +70,7 @@ const applyVariables = (parser: Parser, variables: string[]) => {
  * // typescript
  * import { addDefaults } from '@typicalninja/tagscript';
  * 
- * const parser = ...parser code here
+ * const parser = // ...parser code here 
  * 
  * addDefaults(parser, [
  * 	'random',
@@ -67,17 +88,18 @@ const applyVariables = (parser: Parser, variables: string[]) => {
  * functions:
  * 
  * choose - random item from args
+ * math - evaluates math expressions
  * 
  * ```
  */
 const applyExt = (parser: Parser, modules: string[]) => {
 	if(!Array.isArray(modules)) throw new Error('Modules must be a Array');
 	if(!(parser instanceof Parser)) throw new Error('Parser Must be a InstanceOf a Parser');
-	const variables = modules.filter(m => Variables[m]);
-	const functions = modules.filter(m => Functions[m])
+	const variables = /* Filters and gets the number of variables to enable */ modules.filter(m => Variables[m]);
+	const functions = /* Filters and gets the number of Functions to enable */ modules.filter(m => Functions[m])
 
-	if(variables.length) applyVariables(parser, variables)
-	if(functions.length) applyFunctions(parser, functions)
+	if(variables.length) /* Apply the variables */ applyVariables(parser, variables)
+	if(functions.length) /* Apply the functions */ applyFunctions(parser, functions)
 
 	return parser
 }

@@ -12,7 +12,8 @@ export const exp_types = {
 	function_withoutParams: 'TYPE_FUNCTION_N_PARAM',
 	unknown: 'TYPE_UNKNOWN',
 	variables: 'TYPE_VARIABLE',
-	declaration: 'TYPE_DECLARATION'
+	declaration: 'TYPE_DECLARATION',
+	condition: 'TYPE_CONDITION'
 }
 
 export const templateRegex = /{(.*?)}/gis

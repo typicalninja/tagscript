@@ -1,4 +1,3 @@
-import util from 'util';
 import Runner from '../runner';
 import { accessVariables } from './variables';
 
@@ -26,7 +25,7 @@ export const makeString = (ctx: any, string: string, runner: Runner) => {
 		if(ctx[key]) {
 			value = ctx[key];
 			// convert the value to a string if its not
-			if(typeof value !== 'string') value = util.inspect(value)
+			if(typeof value !== 'string') value = String(value)
 		}
 		else {
 			// supports "." (ex: key.value) in strings

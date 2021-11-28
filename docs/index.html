@@ -1,22 +1,26 @@
 <!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@typicalninja21/tagscript</title><meta name="description" content="Documentation for @typicalninja21/tagscript"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@typicalninja21/tagscript</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@typicalninja21/tagscript</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#beta" id="beta" style="color: inherit; text-decoration: none;">
+  <h1>beta</h1>
+</a>
+
 <a href="#tagscript" id="tagscript" style="color: inherit; text-decoration: none;">
   <h1>tagscript</h1>
 </a>
 <blockquote>
-<p>Easy to use Templating system. Made for giving</p>
+<p>Easy to use Templating system. Let your user&#39;s write scripts themselves</p>
 </blockquote>
 
 <a href="#install" id="install" style="color: inherit; text-decoration: none;">
   <h1>Install</h1>
 </a>
-<pre><code><span class="hl-2">    </span><span class="hl-3">npm</span><span class="hl-2"> </span><span class="hl-3">i</span><span class="hl-2"> @</span><span class="hl-3">typicalninja21</span><span class="hl-2">/</span><span class="hl-3">tagscript</span>
+<pre><code class="language-diff"><span class="hl-2">    npm i @typicalninja21/tagscript</span>
 </code></pre>
 
 <a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
   <h1>Docs</h1>
 </a>
 <blockquote>
-<p>Docs are available at <a href="">here</a></p>
+<p>Docs are available at <a href="https://typicalninja493.github.io/tagscript/">here</a></p>
 </blockquote>
 
 <a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
@@ -37,16 +41,147 @@
 <blockquote>
 <p>Below is a full complete script to showcase the features of this package, you can see below for more specific examples</p>
 </blockquote>
-<pre><code class="language-ts"><span class="hl-0">// ctx is defined in above base snippet</span><br/><span class="hl-0">// choose() is a default function, you will have to apply it</span><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">script</span><span class="hl-2"> = </span><span class="hl-4">`</span><br/><span class="hl-4">{var = &#39;string&#39;}</span><br/><span class="hl-4">{&quot;var is defined as $(var)&quot;}</span><br/><span class="hl-4">{func = choose(&#39;today is great&#39;, &#39;today is bad&#39;)}</span><br/><span class="hl-4">{&quot;is today great? $(func)&quot;}</span><br/><span class="hl-4">{randomOfRandom = choose(func, &#39;idk&#39;)}</span><br/><span class="hl-4">{&quot;Random of Random is $(randomOfRandom)&quot;}</span><br/><span class="hl-4">`</span>
+<pre><code class="language-ts"><span class="hl-0">// ctx is defined in above base snippet</span><br/><span class="hl-0">// choose() is a default function, you will have to apply it</span><br/><span class="hl-0">// process and its sub property is a default function, you will have to apply it</span><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">script</span><span class="hl-2"> = </span><span class="hl-4">`</span><br/><span class="hl-4">{var = &#39;string&#39;}</span><br/><span class="hl-4">{&quot;var is defined as $(var)&quot;}</span><br/><span class="hl-4">{func = choose(&#39;today is great&#39;, &#39;today is bad&#39;)}</span><br/><span class="hl-4">{&quot;is today great? $(func)&quot;}</span><br/><span class="hl-4">{randomOfRandom = choose(func, &#39;idk&#39;)}</span><br/><span class="hl-4">{&quot;Random of Random is $(randomOfRandom)&quot;}</span><br/><span class="hl-4">{&quot;Process Version is $(process.version) (we support &quot;.&quot; syntax) }</span><br/><span class="hl-4">`</span><br/><br/><span class="hl-0">// use the parse function</span><br/><span class="hl-3">ctx</span><span class="hl-2">.</span><span class="hl-7">parse</span><span class="hl-2">(</span><span class="hl-3">script</span><span class="hl-2">).</span><span class="hl-7">then</span><span class="hl-2">(</span><span class="hl-3">console</span><span class="hl-2">.</span><span class="hl-3">log</span><span class="hl-2">).</span><span class="hl-7">catch</span><span class="hl-2">(</span><span class="hl-3">console</span><span class="hl-2">.</span><span class="hl-3">log</span><span class="hl-2">)</span>
 </code></pre>
 
+<a href="#providing-static-props" id="providing-static-props" style="color: inherit; text-decoration: none;">
+  <h1>Providing Static props</h1>
+</a>
+<blockquote>
+<p>Static props is a object containing data about a expression (script / string you provide). it contains data about expression type and whats contained.Static props are unique between different expressions, but same with every expression</p>
+</blockquote>
+<p><strong>example:</strong></p>
+<pre><code class="language-ts"><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">script1</span><span class="hl-2"> = </span><span class="hl-4">`</span><br/><span class="hl-4">{&quot;this is a example&quot;}</span><br/><span class="hl-4">`</span><br/><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">script2</span><span class="hl-2"> = </span><span class="hl-4">`</span><br/><span class="hl-4">{exampleFUNC()}</span><br/><span class="hl-4">`</span>
+</code></pre>
+<blockquote>
+<p>Here <code>script1</code> &#39;s static prop Object will be different from <code>script2</code>&#39;s static Prop Object. but when u generate a new <strong>Static object</strong> for script1 it will still be equal to the earlier generated <strong>Static Prop</strong> of <code>script1</code>, same will be said for <code>script2</code></p>
+</blockquote>
+
+<a href="#using-this-for-our-advantage" id="using-this-for-our-advantage" style="color: inherit; text-decoration: none;">
+  <h3>Using this for our advantage</h3>
+</a>
+<blockquote>
+<p>As said in the main title, we can provide a static object our selves to our parser. if we do not provide one the parser will take time to generate one <strong>itself</strong> and run it.we can save the time it takes to generate a <strong>Static Prop object</strong> by storing a previously generated <strong>Static Prop Object</strong> to our storage (Database) with the rest our data </p>
+</blockquote>
+<p><strong>Example (Following is not a complete code, just a example)</strong></p>
+<pre><code class="language-ts"><span class="hl-0">// first import all the things we need</span><br/><span class="hl-1">import</span><span class="hl-2"> { </span><span class="hl-3">Parser</span><span class="hl-2">, </span><span class="hl-3">getStaticProps</span><span class="hl-2"> } </span><span class="hl-1">from</span><span class="hl-2"> </span><span class="hl-4">&#39;@typicalninja21/tagscript&#39;</span><br/><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">db</span><span class="hl-2"> = </span><span class="hl-0">/* What ever your db is here */</span><br/><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">parser</span><span class="hl-2"> = </span><span class="hl-5">new</span><span class="hl-2"> </span><span class="hl-7">Parser</span><span class="hl-2">({</span><br/><span class="hl-2">    </span><span class="hl-3">throwError:</span><span class="hl-2"> </span><span class="hl-5">true</span><br/><span class="hl-2">});</span><br/><br/><span class="hl-5">function</span><span class="hl-2"> </span><span class="hl-7">saveScript</span><span class="hl-2">(</span><span class="hl-3">scriptName</span><span class="hl-2">, </span><span class="hl-3">script</span><span class="hl-2">) {</span><br/><span class="hl-2">    </span><span class="hl-1">return</span><span class="hl-2"> </span><span class="hl-3">db</span><span class="hl-2">.</span><span class="hl-7">save</span><span class="hl-2">(</span><span class="hl-3">scriptName</span><span class="hl-2">, {</span><br/><span class="hl-2">        </span><span class="hl-3">script</span><span class="hl-2">,</span><br/><span class="hl-2">        </span><span class="hl-3">runnable:</span><span class="hl-2"> </span><span class="hl-7">getStaticProps</span><span class="hl-2">(</span><span class="hl-3">script</span><span class="hl-2">),</span><br/><span class="hl-2">        </span><span class="hl-0">/*Some other data here...*/</span><br/><span class="hl-2">    })</span><br/><span class="hl-2">}</span><br/><br/><span class="hl-5">function</span><span class="hl-2"> </span><span class="hl-7">runScript</span><span class="hl-2">() {</span><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">scriptData</span><span class="hl-2"> = </span><span class="hl-3">db</span><span class="hl-2">.</span><span class="hl-7">get</span><span class="hl-2">(</span><span class="hl-4">&#39;checkIfTrue&#39;</span><span class="hl-2">);</span><br/><br/><span class="hl-0">// we will assume db.get (scriptData) will return the value we stores using saveScript()</span><br/><span class="hl-2">    </span><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">ctx</span><span class="hl-2"> = </span><span class="hl-3">parser</span><span class="hl-2">.</span><span class="hl-7">getNewCtx</span><span class="hl-2">();</span><br/><br/><span class="hl-2">  </span><span class="hl-0">/*Add Variables and stuff here (do your usual stuff here) */</span><br/><span class="hl-2">  </span><span class="hl-0">// finally parse</span><br/><span class="hl-2">  </span><span class="hl-1">return</span><span class="hl-2"> </span><span class="hl-3">ctx</span><span class="hl-2">.</span><span class="hl-7">parse</span><span class="hl-2">(</span><span class="hl-3">scriptData</span><span class="hl-2">.</span><span class="hl-3">script</span><span class="hl-2">, </span><span class="hl-3">scriptData</span><span class="hl-2">.</span><span class="hl-3">runnable</span><span class="hl-2">)</span><br/><span class="hl-2">}</span><br/><br/><br/><span class="hl-0">// first save the script</span><br/><span class="hl-7">saveScript</span><span class="hl-2">(</span><span class="hl-4">&#39;checkIfTrue&#39;</span><span class="hl-2">, </span><span class="hl-4">`{checkTrue(true)}`</span><span class="hl-2">)</span><br/><span class="hl-7">runScript</span><span class="hl-2">(</span><span class="hl-4">&#39;checkIfTrue&#39;</span><span class="hl-2">).</span><span class="hl-7">then</span><span class="hl-2">(</span><span class="hl-3">console</span><span class="hl-2">.</span><span class="hl-3">log</span><span class="hl-2">)</span>
+</code></pre>
+
+<a href="#user-guide" id="user-guide" style="color: inherit; text-decoration: none;">
+  <h1>User guide</h1>
+</a>
+<blockquote>
+<p>A Guide to users who want to write scripts (refer your users if you want to here)</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> All of the below code is inside {} unless specified</p>
+</blockquote>
+
+<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
+  <h2>Table of contents</h2>
+</a>
+<ol>
+<li><a href="#functions">Functions</a> :<ol>
+<li><a href="#functions-without-params">Functions without params</a></li>
+<li><a href="#functions-with-params">Functions with params</a></li>
+</ol>
+</li>
+<li><a href="#variables">Variables</a><ol>
+<li><a href="#defining-a-variable">Defining a variable</a></li>
+<li><a href="#quotquot-syntax">&quot;.&quot; Syntax</a>
+<a href="#functions" id="functions" style="color: inherit; text-decoration: none;">
+  <h3>Functions</h3>
+</a>
+</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>You can call functions as demonstrated below</p>
+</blockquote>
+<ul>
+<li>The Important part to call the Function is &quot;()&quot;</li>
+<li>make sure there no spaces between &quot;function name&quot; and &quot;()&quot;</li>
+<li>if throwError is enabled and there is no function name that, a error will be thrown</li>
+<li>by default there are no functions defined</li>
+<li>And you (as the user writing script) cant define functions</li>
+</ul>
+
+<a href="#functions-without-params" id="functions-without-params" style="color: inherit; text-decoration: none;">
+  <h4>Functions without params</h4>
+</a>
+<blockquote>
+<p>functions without params are called normally like below</p>
+</blockquote>
+<pre><code><span class="hl-2">    </span><span class="hl-5">function</span><span class="hl-2">() </span>
+</code></pre>
+<ul>
+<li>A Function without anything in between &quot;()&quot; is a Function without params</li>
+<li>Passing no params to a function that expects param&#39;s might throw a Error (depends on the function)
+<a href="#functions-with-params" id="functions-with-params" style="color: inherit; text-decoration: none;">
+  <h4>Functions with params</h4>
+</a>
+</li>
+</ul>
+<blockquote>
+<p>Functions with params are bit different but not complex</p>
+</blockquote>
+<pre><code><span class="hl-2">    </span><span class="hl-5">function</span><span class="hl-2">(&lt;</span><span class="hl-3">param</span><span class="hl-2">&gt;, &lt;</span><span class="hl-3">param</span><span class="hl-2">&gt;)</span>
+</code></pre>
+<ul>
+<li>Define functions params inside &quot;()&quot;</li>
+<li>separate each param by a &quot;,&quot;</li>
+<li>strings should be between acceptable string start and ends characters (&quot;, &#39;)</li>
+<li>functions in param&#39;s is <strong>Supported</strong> but is not guaranteed to be stable and fast</li>
+</ul>
+
+<a href="#variables" id="variables" style="color: inherit; text-decoration: none;">
+  <h3>Variables</h3>
+</a>
+<blockquote>
+<p>see the below sub topics on different ways of using them</p>
+</blockquote>
+<ul>
+<li>if throwError is enabled and variable is not in the specified context, error will be thrown</li>
+<li>&quot;.&quot; syntax is supported (ex: variable1.variable2 &lt; Variable 2 must be a Sub Property of variable1)</li>
+</ul>
+
+<a href="#defining-a-variable" id="defining-a-variable" style="color: inherit; text-decoration: none;">
+  <h4>Defining a variable</h4>
+</a>
+<blockquote>
+<p>Format to defining a variable is <code>variable = value</code></p>
+</blockquote>
+<pre><code><span class="hl-3">variable</span><span class="hl-2"> = </span><span class="hl-4">&quot;string value&quot;</span><br/><span class="hl-2"># </span><span class="hl-3">or</span><br/><span class="hl-3">variable</span><span class="hl-2"> = </span><span class="hl-7">functionValue</span><span class="hl-2">();</span><br/><span class="hl-2"># </span><span class="hl-3">or</span><br/><span class="hl-3">variable2</span><span class="hl-2"> = </span><span class="hl-3">variable</span>
+</code></pre>
+<ul>
+<li>Value can be a <code>string / function / another variable</code></li>
+<li>when defining you may override a previously defined variable</li>
+<li>make sure to define a variable before using it</li>
+<li>If variable is undefined and throwError is enabled it will throw a Error</li>
+</ul>
+
+<a href="#quotquot-syntax" id="quotquot-syntax" style="color: inherit; text-decoration: none;">
+  <h4>&quot;.&quot; syntax</h4>
+</a>
+<blockquote>
+<p>&quot;.&quot; syntax is simple, see the below example</p>
+</blockquote>
+<pre><code><span class="hl-3">variable1</span><span class="hl-2">.</span><span class="hl-3">variable2</span>
+</code></pre>
+<ul>
+<li>Here, variable 1 has a sub property called variable2.</li>
+<li>You can keep chaining these (only if the sub Properties exists)</li>
+<li>if throwError is enabled and <code>variable1</code> is undefined a Error will be thrown
 <a href="#support" id="support" style="color: inherit; text-decoration: none;">
   <h1>Support</h1>
 </a>
+</li>
+</ul>
 <blockquote>
 <p>This package was made for my own discord bot&#39;s (<a href="https://axixbot.cf">axix</a> v2) custom commands / tags system</p>
 </blockquote>
 <ul>
 <li>If you need support for this package, please join the <a href="https://discord.com/invite/HVnGtzMaW4">support server</a></li>
 </ul>
-</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class"><a href="classes/Parser.html" class="tsd-kind-icon">Parser</a></li><li class="tsd-kind-class"><a href="classes/Runner.html" class="tsd-kind-icon">Runner</a></li><li class="tsd-kind-property"><a href="modules.html#DataGen" class="tsd-kind-icon">Data<wbr/>Gen</a></li><li class="tsd-kind-function"><a href="modules.html#addDefaults" class="tsd-kind-icon">add<wbr/>Defaults</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class"><a href="classes/Parser.html" class="tsd-kind-icon">Parser</a></li><li class="tsd-kind-class"><a href="classes/Runner.html" class="tsd-kind-icon">Runner</a></li><li class="tsd-kind-property"><a href="modules.html#getStaticProps" class="tsd-kind-icon">get<wbr/>Static<wbr/>Props</a></li><li class="tsd-kind-function"><a href="modules.html#addDefaults" class="tsd-kind-icon">add<wbr/>Defaults</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
