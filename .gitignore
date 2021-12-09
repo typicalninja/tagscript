@@ -6,3 +6,4 @@
 /test/perforemence.js
 .gitignore
 ex.js
+.npmignore
