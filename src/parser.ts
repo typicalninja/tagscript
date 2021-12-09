@@ -1,8 +1,7 @@
 import { defaultOptions } from './internal/constants';
 import { merge } from './internal/utils';
-import { default as getStaticProps } from './internal/staticprops'
 import { ValidationError } from './internal/errors';
-import Runner from './internal/runner/runner';
+import InterPreter from './internal/interpreter/interpreter';
 
 interface parserOptions {
 	globalCtx: {
@@ -219,10 +218,10 @@ class Parser {
 		//	data = getStaticProps(str);
 		}
 		const original = str;
-		// no need to run the data through a runner if there is no templates
+		// no need to run the data through a InterPreter if there is no templates, less time to return the result
 		if(!data.templates.length) return str;
-		// start a new Runner and run it 
-		return await (new Runner(data, ctx, original, thisContext)).run()
+		// start a new InterPreter and run it 
+		return await (new InterPreter(data, ctx, original, thisContext)).run()
 	}
 }
 

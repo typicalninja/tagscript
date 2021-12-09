@@ -1,11 +1,8 @@
 /node_modules
 /webpack.config.js
 /tsconfig.json
-/utils.js
 /dist
-/parser.js
 /t.js
-/old.ts
-/dist/old.js
 /test/perforemence.js
 .gitignore
+ex.js

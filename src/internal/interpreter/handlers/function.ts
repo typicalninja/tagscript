@@ -3,7 +3,7 @@
  */
 
 import { exp_types } from "../../constants"
-import Runner from "../runner"
+import Runner from "../interpreter"
 import { makeString } from "./string";
 import util from 'util';
 import { default as getHandler } from './index';

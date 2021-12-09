@@ -1,8 +1,11 @@
-import Runner from '../runner';
+/*
+interpreter : Handler for strings
+*/
+import Runner from '../interpreter';
 import { accessVariables } from './variables';
 
 // variable in string are in from of $(var)
-export const stringTemplates = /\$\((.*?)\)/g
+export const stringTemplates = /\$\((.*?)\)/gi
 
 // formats a string, (strings as in whats treated as a string in tagscript)
 export const makeString = (ctx: any, string: string, runner: Runner) => {

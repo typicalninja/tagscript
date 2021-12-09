@@ -1,8 +1,8 @@
 /**
- * Runner : Handler for variables
+ * interpreter : Handler for variables
  */
 
-import Runner from "../runner";
+import Runner from "../interpreter";
 import util from 'util';
 import { exp_types } from "../../constants";
 import { makeString } from "./string";
