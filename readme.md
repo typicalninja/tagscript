@@ -50,6 +50,15 @@ const script = `
 ctx.parse(script).then(console.log).catch(console.log)
 ```
 
+# Using from the web
+
+We offer a web bundle that is bundled with [webpack](https://webpack.js.org/) and is available at the following cdns
+
+* If possible download this and host on your own website
+* If not just 
+
+[jsdelivr](https://cdn.jsdelivr.net/gh/typicalninja493/tagscript@beta/web/bundle.js) (recommended)
+
 # Providing Static props
 
 > Static props is a object containing data about a expression (script / string you provide). it contains data about expression type and whats contained.Static props are unique between different expressions, but same with every expression

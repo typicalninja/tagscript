@@ -92,7 +92,7 @@ const applyExt = (parser: Parser, modules: string[]) => {
 	if(!Array.isArray(modules)) throw new Error('Modules must be a Array');
 	if(!(parser instanceof Parser)) throw new Error('Parser Must be a InstanceOf a Parser');
 	const variables = /* Filters and gets the number of variables to enable */ modules.filter(m => Variables[m]);
-	const functions = /* Filters and gets the number of Functions to enable */ modules.filter(m => Functions[m])
+	const functions = /* Filters and gets the number of Functions to enable */ modules.filter(m => Functions[m]);
 
 	if(variables.length) /* Apply the variables */ applyVariables(parser, variables)
 	if(functions.length) /* Apply the functions */ applyFunctions(parser, functions)
@@ -100,4 +100,30 @@ const applyExt = (parser: Parser, modules: string[]) => {
 	return parser
 }
 
-export default applyExt;
+const removeVariables = (parser: Parser, variables: string[]) => {
+		if(!Array.isArray(variables)) throw new Error('Variables must be a Array');
+		if(!(parser instanceof Parser)) throw new Error('Parser Must be a InstanceOf a Parser');
+		return variables.forEach((variable) => {
+			parser.removeVariable(variable)
+		})
+}
+
+const removeFunctions = (parser: Parser, functions: string[]) => {
+		if(!Array.isArray(functions)) throw new Error('Functions must be a Array');
+		if(!(parser instanceof Parser)) throw new Error('Parser Must be a InstanceOf a Parser');
+		return functions.forEach((function_) => {
+			parser.removeVariable(function_)
+		})
+}
+
+
+const removeExt = (parser: Parser, modules: string[]) => {
+	if(!Array.isArray(modules)) throw new Error('Modules must be a Array');
+	if(!(parser instanceof Parser)) throw new Error('Parser Must be a InstanceOf a Parser');
+
+	return modules.forEach((module) => {
+		parser.removeVariable(module)
+	})
+}
+
+export { applyExt, removeExt };

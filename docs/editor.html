@@ -1,0 +1,120 @@
+<html>   
+	<head>   
+		<style>       
+			div {
+				display:inline-block;
+				position:relative;
+			}
+
+			button {
+				position:absolute;
+				bottom:10px;
+				right:10px;
+			}
+
+			textarea {
+				display:block;
+			}
+		</style>
+	</head>
+	<body style="background-color: black; color: white;">       
+			<div>
+				<h1>Input</h1>
+				<div>
+					<textarea id="txt" cols="70" rows="20"></textarea>
+					<button onclick="onSubmit()">Run</button>
+		
+		 		</div>
+			 <h1>Output</h1>
+				<div>   
+					<textarea id="result" cols="50" rows="20" readonly></textarea>	 
+					<button onclick="clearOutput()">Clear</button>
+				</div>
+
+			<h1>Console</h1>
+				<div>   
+					<textarea id="console" cols="55" rows="30" readonly></textarea>	 
+					<button onclick="clearConsole()">Clear</button>
+				</div>
+
+			<h1>Context</h1>
+				<p>Context that gets generated for this script</p>
+				<div>   
+					<textarea id="context" cols="30" rows="10" readonly></textarea>	 
+				</div>
+			<h1>Static Props</h1>
+				<p>Static Props generated for this script</p>
+				<div>   
+					<textarea id="sp" cols="60" rows="60" readonly></textarea>	 
+				</div>
+
+			<h1>Defaults</h1>
+				<div>  
+					<h2>Variables</h2>
+					<input type="checkbox" id="version" name="version" value="version" onclick="enableFeature('version')">
+					<label for="version">version</label><br>
+					<h2>Functions</h2>
+					<input type="checkbox" id="math" name="math" value="math" onclick="enableFeature('math')">
+					<label for="math">math</label><br>
+					<input type="checkbox" id="choose" name="choose" value="choose" onclick="enableFeature('choose')">
+					<label for="choose">choose</label><br>
+				</div>
+		</div>
+			
+
+	</body>
+	<!-- Import out web bundle for tagscript -->
+	<script src="assets/bundle.js"></script>
+	<script>     
+		let parser = new tagscript.Parser({
+			throwError: true
+		})
+
+		let features = []
+
+		function enableFeature(feature) {
+			if(features.includes(feature)) {
+				features.splice(features.indexOf(feature), 1)
+				tagscript.removeDefaults(parser, [feature])
+				log(`Disabled Default : ${feature}`)
+			} else {
+				features.push(feature)
+				tagscript.addDefaults(parser, features)
+				log(`Enabled Default : ${feature}`)
+			}
+		}
+
+		function log(message) {
+			document.getElementById('console').value += '\n\n' + '> ' + message
+			return true;
+		}
+
+		function clearConsole() {
+			document.getElementById('console').value = ''
+			return true;
+		}
+
+		function clearOutput() {
+			document.getElementById('result').value = ''
+			return true;
+		}
+
+		function onSubmit() {
+			log('Submitting...')
+			let start = Date.now()
+			let ctx = parser.getNewCtx();
+			let txt = document.getElementById('txt').value;
+			if(!txt || txt == "") return log('No Valid input Provided')
+			ctx.parse(txt).then((result) => {
+				log(`Parsing complete [Time taken: ${(Date.now() - start)}ms]`)
+				if(result == "" || !result) return document.getElementById('result').value = "<empty result>"
+				document.getElementById('result').value = result;
+				document.getElementById('context').value = JSON.stringify(ctx.ctx, null, 4);
+
+			 	document.getElementById('sp').value = JSON.stringify(tagscript.getStaticProps(txt), null, 4);
+			}).catch(err => {
+				log(`Error occurred: ${err}`)
+			});
+		}
+	</script>
+</html>

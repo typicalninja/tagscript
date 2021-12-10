@@ -1,6 +1,7 @@
 import { defaultOptions } from './internal/constants';
 import { merge } from './internal/utils';
 import { ValidationError } from './internal/errors';
+import { default as getStaticProps } from './internal/static/staticprops';
 import InterPreter from './internal/interpreter/interpreter';
 
 interface parserOptions {
@@ -215,11 +216,11 @@ class Parser {
 		let data = staticProps;
 		if(!staticProps) {
 			// user didn't provide any staticProps, get one ourselves
-		//	data = getStaticProps(str);
+			data = getStaticProps(str);
 		}
-		const original = str;
+		const original = str; 
 		// no need to run the data through a InterPreter if there is no templates, less time to return the result
-		if(!data.templates.length) return str;
+		if(!data?.templates.length) return str;
 		// start a new InterPreter and run it 
 		return await (new InterPreter(data, ctx, original, thisContext)).run()
 	}
