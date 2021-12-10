@@ -36,10 +36,6 @@ const Functions: { [key: string]: (ctx: any, args: any[]) => string } = {
 
 const Variables: { [key: string]: string | {} } = {
 	version: version,
-	process: {
-		version: process.version,
-		arch: process.arch
-	}
 }
 
 

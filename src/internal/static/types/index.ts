@@ -3,8 +3,8 @@
  * Belongs to the parser
  */
 
-import { exp_types } from "../constants";
-import { cleanString } from "../utils";
+import { exp_types } from "../../constants";
+import { cleanString } from "../../utils";
 // test functions for various expr types
 import { test as testFunction, hasParams, functionParamsRegex } from "./function";
 import { test as testString } from "./string";

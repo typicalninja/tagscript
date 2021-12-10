@@ -1,9 +1,9 @@
 /**
  * Generate a Object with props for the runner to parser and interpret
  */
-import { templateRegex } from "./constants"
+import { templateRegex } from "../constants"
 import { getTypes, getData } from './types/index';
-import { cleanString } from "./utils";
+import { cleanString } from "../utils";
 
 const applyDefaultData = (obj: Object, str: string) => {
 	Object.defineProperties(obj, {
