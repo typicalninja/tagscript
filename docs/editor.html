@@ -65,56 +65,9 @@
 	</body>
 	<!-- Import out web bundle for tagscript -->
 	<script src="assets/bundle.js"></script>
-	<script>     
-		let parser = new tagscript.Parser({
-			throwError: true
-		})
-
-		let features = []
-
-		function enableFeature(feature) {
-			if(features.includes(feature)) {
-				features.splice(features.indexOf(feature), 1)
-				tagscript.removeDefaults(parser, [feature])
-				log(`Disabled Default : ${feature}`)
-			} else {
-				features.push(feature)
-				tagscript.addDefaults(parser, features)
-				log(`Enabled Default : ${feature}`)
-			}
-		}
-
-		function log(message) {
-			document.getElementById('console').value += '\n\n' + '> ' + message
-			return true;
-		}
-
-		function clearConsole() {
-			document.getElementById('console').value = ''
-			return true;
-		}
-
-		function clearOutput() {
-			document.getElementById('result').value = ''
-			return true;
-		}
-
-		function onSubmit() {
-			log('Submitting...')
-			let start = Date.now()
-			let ctx = parser.getNewCtx();
-			let txt = document.getElementById('txt').value;
-			if(!txt || txt == "") return log('No Valid input Provided')
-			ctx.parse(txt).then((result) => {
-				log(`Parsing complete [Time taken: ${(Date.now() - start)}ms]`)
-				if(result == "" || !result) return document.getElementById('result').value = "<empty result>"
-				document.getElementById('result').value = result;
-				document.getElementById('context').value = JSON.stringify(ctx.ctx, null, 4);
-
-			 	document.getElementById('sp').value = JSON.stringify(tagscript.getStaticProps(txt), null, 4);
-			}).catch(err => {
-				log(`Error occurred: ${err}`)
-			});
-		}
+	<!-- Webpack bundle for node.js util inspect -->
+	<script src="assets/inspect.js"></script>
+	<script>
+		let parser=new tagscript.Parser({throwError:!0}),features=[];function enableFeature(e){features.includes(e)?(features.splice(features.indexOf(e),1),tagscript.removeDefaults(parser,[e]),log(`Disabled Default : ${e}`)):(features.push(e),tagscript.addDefaults(parser,features),log(`Enabled Default : ${e}`))}function log(e){return document.getElementById("console").value+="\n\n> "+e,!0}function clearConsole(){return document.getElementById("console").value="",!0}function clearOutput(){return document.getElementById("result").value="",!0}function onSubmit(){log("Submitting...");let e=Date.now(),t=parser.getNewCtx(),n=document.getElementById("txt").value;if(!n||""==n)return log("No Valid input Provided");t.parse(n).then(r=>{if(log(`Parsing complete [Time taken: ${Date.now()-e}ms]`),""==r||!r)return document.getElementById("result").value="<empty result>";document.getElementById("result").value=r,document.getElementById("context").value=inspect.default(t.ctx),document.getElementById("sp").value=JSON.stringify(tagscript.getStaticProps(n),null,4)}).catch(e=>{log(`Error occurred: ${e}`)})}
 	</script>
 </html>
