@@ -22,9 +22,9 @@ describe('Performance', () => {
 		{'$1 :: $2'}
 		`
 
-		await ctx.parse(script).then((r) => {
+	//	await ctx.parse(script).then((r) => {
 			clearTimeout(timeout)
-			console.log(r)
-		})
+		//	console.log(r)
+		//})
 	});
 })

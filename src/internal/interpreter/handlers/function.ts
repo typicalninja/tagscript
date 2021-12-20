@@ -3,13 +3,13 @@
  */
 
 import { exp_types } from "../../constants"
-import Runner from "../interpreter"
+import Interpreter from "../interpreter"
 import { makeString } from "./string";
 import util from 'util';
 import { default as getHandler } from './index';
 
 
-export const parseArguments = async (ctx: any, args: any[], runner: Runner) => {
+export const parseArguments = async (ctx: any, args: any[], runner: Interpreter) => {
 	return await Promise.all(args.map(async (arg: any) => {
 		const type = arg.type;
 		let result = null;
@@ -20,7 +20,7 @@ export const parseArguments = async (ctx: any, args: any[], runner: Runner) => {
 			break;
 			case exp_types.variables:
 				// get the value of the variable
-				const handler = getHandler(exp_types.variables)
+				const handler = getHandler(exp_types.variables, runner)
 				result = await handler(ctx, arg, runner)
 			break;
 		}
@@ -29,7 +29,7 @@ export const parseArguments = async (ctx: any, args: any[], runner: Runner) => {
 	}))
 }
 
-export const handle_F_Args = async (ctx: any, FuncData: any, runner: Runner) => {
+export const handle_F_Args = async (ctx: any, FuncData: any, runner: Interpreter) => {
 	let func = FuncData.name;
 	let args = FuncData.params;
 	let result = ''
@@ -47,7 +47,7 @@ export const handle_F_Args = async (ctx: any, FuncData: any, runner: Runner) => 
 	return result;
 }
 
-export const handle_N_Args = async (ctx: any, FuncData: any, runner: Runner) => {
+export const handle_N_Args = async (ctx: any, FuncData: any, runner: Interpreter) => {
 	let func = FuncData.name;
 	if(!ctx[func] || typeof ctx[func] !== 'function') return runner.throwError(`Function ${func} is Undefined`)
 	let result = '';
@@ -62,7 +62,7 @@ export const handle_N_Args = async (ctx: any, FuncData: any, runner: Runner) => 
 	return result;
 }
 
-export const handler_FUNC = async (ctx: any, funcData: any, runner: Runner) => {
+export const handler_FUNC = async (ctx: any, funcData: any, runner: Interpreter) => {
 	let result = ''
 	// there are 2 types of functions, with params or without params
 	switch(funcData.type) {

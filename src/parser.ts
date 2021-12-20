@@ -3,6 +3,7 @@ import { merge } from './internal/utils';
 import { ValidationError } from './internal/errors';
 import { default as getStaticProps } from './internal/static/staticprops';
 import InterPreter from './internal/interpreter/interpreter';
+import ExtensionManager from './internal/extensions/extensions';
 
 interface parserOptions {
 	globalCtx: {
@@ -23,6 +24,7 @@ class Parser {
 	globalCtx: {
 		[key: string]: string
 	}
+	extensionManager: ExtensionManager;
 	constructor(options: parserOptions) {
 		/**
 		 * Options for the parser
@@ -32,6 +34,8 @@ class Parser {
 		 * Global context, stores variables / functions that are global
 		 */
 		this.globalCtx = this.options.globalCtx
+
+		this.extensionManager = new ExtensionManager(this);
 	}
 	/**
 	 * Utility to throw a Error if user enabled throwError option
@@ -216,13 +220,24 @@ class Parser {
 		let data = staticProps;
 		if(!staticProps) {
 			// user didn't provide any staticProps, get one ourselves
-			data = getStaticProps(str);
+			data = getStaticProps(str, thisContext);
 		}
 		const original = str; 
 		// no need to run the data through a InterPreter if there is no templates, less time to return the result
 		if(!data?.templates.length) return str;
 		// start a new InterPreter and run it 
 		return await (new InterPreter(data, ctx, original, thisContext)).run()
+	}
+    /**
+	 * register a new extension
+	 * @param extension - the extension to add
+	 * @param options - options for the extension
+	 * @returns 
+	 */
+	register(extension: (options: any, extensionManager: ExtensionManager) => { [key:string]: string | Function }, options: { [key: string]: string }) {
+		 this.extensionManager.register(extension, options);
+        // so users can keep chaining .register calls
+		 return this;
 	}
 }
 

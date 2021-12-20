@@ -21,13 +21,13 @@
 			<div>
 				<h1>Input</h1>
 				<div>
-					<textarea id="txt" cols="70" rows="20"></textarea>
+					<textarea id="txt" cols="70" rows="20" spellcheck=”false”></textarea>
 					<button onclick="onSubmit()">Run</button>
 		
 		 		</div>
 			 <h1>Output</h1>
 				<div>   
-					<textarea id="result" cols="50" rows="20" readonly></textarea>	 
+					<textarea id="result" cols="50" rows="20" readonly spellcheck=”false”></textarea>	 
 					<button onclick="clearOutput()">Clear</button>
 				</div>
 
@@ -40,15 +40,16 @@
 			<h1>Context</h1>
 				<p>Context that gets generated for this script</p>
 				<div>   
-					<textarea id="context" cols="30" rows="10" readonly></textarea>	 
+					<textarea id="context" cols="30" rows="10" spellcheck=”false” readonly></textarea>	 
 				</div>
 			<h1>Static Props</h1>
 				<p>Static Props generated for this script</p>
 				<div>   
-					<textarea id="sp" cols="60" rows="60" readonly></textarea>	 
+					<textarea id="sp" cols="60" rows="60" spellcheck=”false” readonly ></textarea>	 
 				</div>
 
 			<h1>Defaults</h1>
+				<p>Add Defaults for this parser, Since Defaults functions are now included</p>
 				<div>  
 					<h2>Variables</h2>
 					<input type="checkbox" id="version" name="version" value="version" onclick="enableFeature('version')">

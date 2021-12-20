@@ -2,13 +2,13 @@
  * interpreter : Handler for variables
  */
 
-import Runner from "../interpreter";
+import Interpreter from "../interpreter";
 import util from 'util';
 import { exp_types } from "../../constants";
 import { makeString } from "./string";
 import { default as getHandler } from './index';
 
-export const accessVariables = (ctx: { [key: string]: string | undefined } | undefined | string, runner: Runner, variables: string[]) => {
+export const accessVariables = (ctx: { [key: string]: string | undefined } | undefined | string, runner: Interpreter, variables: string[]) => {
 	let c = ctx;
 	let construct = '';
 	let i = 0;
@@ -26,7 +26,7 @@ export const accessVariables = (ctx: { [key: string]: string | undefined } | und
 	return c;
 }
 
-export const handler_DEC = async (ctx: { [key: string]: string | undefined } | undefined | string, varData: any, runner: Runner) => {
+export const handler_DEC = async (ctx: { [key: string]: string | undefined } | undefined | string, varData: any, runner: Interpreter) => {
 	let c = ctx;
 	let construct = '';
 	let i = 0;
@@ -53,7 +53,7 @@ export const handler_DEC = async (ctx: { [key: string]: string | undefined } | u
 			break;
 			case exp_types.function_withParams:
 			case exp_types.function_withoutParams:
-				const handler = getHandler(type)
+				const handler = getHandler(type, runner)
 				//console.log('ty:', type, vals, c, varData.name)
 
 				Object.defineProperty(c, varData.name, {
@@ -70,7 +70,7 @@ export const handler_DEC = async (ctx: { [key: string]: string | undefined } | u
 	return '';
 }
 
-export const handler_VAR = async (ctx: any, varData: any, runner: Runner) => {
+export const handler_VAR = async (ctx: any, varData: any, runner: Interpreter) => {
 	const variable = accessVariables(ctx, runner, varData.variableAccess);
 
 	return util.inspect(variable);
