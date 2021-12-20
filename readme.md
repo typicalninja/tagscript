@@ -54,11 +54,17 @@ ctx.parse(script).then(console.log).catch(console.log)
 
 We offer a web bundle that is bundled with [webpack](https://webpack.js.org/) and is available at the following cdns
 
-* If possible download this and host on your own website
-* If not just 
+* If possible download this and host on your own website (recommended)
+* If not just use one of the following cdns (not recommended):
 
 [jsdelivr](https://cdn.jsdelivr.net/gh/typicalninja493/tagscript@beta/web/bundle.js) (recommended)
+[statically](https://cdn.statically.io/gh/typicalninja493/tagscript@beta/web/bundle.js)
 
+# Live Demo / Tagscript Editor
+
+You can find a Live Demo / Tagscript Editor [here](https://typicalninja493.github.io/tagscript/editor.html)
+
+> The editor utilizes the web [bundle](#using-from-the-web) 
 # Providing Static props
 
 > Static props is a object containing data about a expression (script / string you provide). it contains data about expression type and whats contained.Static props are unique between different expressions, but same with every expression
