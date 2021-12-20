@@ -82,6 +82,9 @@ export const getData = (exp: string, type: string,  parser: Parser | null) => {
 			if(!staticObject.type) {
 				Object.assign(staticObject, { type: type })
 			}
+			if(!staticObject.name) {
+				Object.assign(staticObject, { name: exp })
+			}
 			const allKeys = Object.keys(staticObject)
 			allKeys.forEach(key => {
 				Object.defineProperty(data, key, {

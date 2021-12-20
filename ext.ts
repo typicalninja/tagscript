@@ -126,4 +126,26 @@ const removeExt = (parser: Parser, modules: string[]) => {
 	})
 }
 
-export { applyExt, removeExt };
+
+
+const createLoadExtensionData = (extensionUnknownData: any) => {
+	const final = {}
+	if(!extensionUnknownData.name) throw new Error('Failed to create Load Data : No Property named "name"')
+	if(extensionUnknownData.onLoad && typeof extensionUnknownData.onLoad !== 'function') throw new Error('Failed to create Load Data : Property "onLoad" must be a function');
+	if(extensionUnknownData.getStaticExtensionData && typeof extensionUnknownData.getStaticExtensionData !== 'function') throw new Error('Failed to create Load Data : Property "getStaticExtensionData" must be a function');
+	if(extensionUnknownData.getInterpreterExtensionData && typeof extensionUnknownData.getInterpreterExtensionData !== 'function') throw new Error('Failed to create Load Data : Property "getInterpreterExtensionData" must be a function');
+
+	const onLoad = extensionUnknownData.onLoad.bind(extensionUnknownData) || (() => {});
+	const getStaticExtensionData = extensionUnknownData.getStaticExtensionData.bind(extensionUnknownData) || (() => null);
+	const getInterpreterExtensionData = extensionUnknownData.getInterpreterExtensionData.bind(extensionUnknownData) || (() => null);
+
+	Object.defineProperties(final, {
+		name: { value: extensionUnknownData.name, enumerable: true, writable: false },
+		onLoad: { value: onLoad, enumerable: true, writable: false },
+		staticGeneratorExtensions: { value: getStaticExtensionData() || [], enumerable: true, writable: false },
+		interpreterExtensions: { value: getInterpreterExtensionData() || [], enumerable: true, writable: false },
+	})
+	return final as { name: string, onLoad: () => void, staticGeneratorExtensions: { type: string, test: Function, getData: Function  }[], interpreterExtensions: { type: string, handler: Function }[] }
+}
+
+export { applyExt, removeExt, createLoadExtensionData };
