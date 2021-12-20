@@ -118,87 +118,12 @@ const scriptData = db.get('checkIfTrue');
 saveScript('checkIfTrue', `{checkTrue(true)}`)
 runScript('checkIfTrue').then(console.log)
 ```
-# User guide
 
-> A Guide to users who want to write scripts (refer your users if you want to here)
+# User Guide
 
-> **Note:** All of the below code is inside {} unless specified
+> A Complete guides for users wanting to write their own scripts can be found [here](https://typicalninja493.github.io/tagscript/guide.html)
 
-## Table of contents
-1. [Functions](#functions) :
-   1. [Functions without params](#functions-without-params)
-   2. [Functions with params](#functions-with-params)
-2. [Variables](#variables)
-	1. [Defining a variable](#defining-a-variable)
-	2. ["." Syntax](#quotquot-syntax)
-### Functions
-
-> You can call functions as demonstrated below
-
-* The Important part to call the Function is "()"
-* make sure there no spaces between "function name" and "()"
-* if throwError is enabled and there is no function name that, a error will be thrown
-* by default there are no functions defined
-* And you (as the user writing script) cant define functions
-
-#### Functions without params
-
-> functions without params are called normally like below
-
-```
-	function() 
-```
-
-* A Function without anything in between "()" is a Function without params
-* Passing no params to a function that expects param's might throw a Error (depends on the function)
-#### Functions with params
-
-> Functions with params are bit different but not complex
-
-```
-	function(<param>, <param>)
-```
-
-* Define functions params inside "()"
-* separate each param by a ","
-* strings should be between acceptable string start and ends characters (", ')
-* functions in param's is **Supported** but is not guaranteed to be stable and fast
-
-### Variables
-
-> see the below sub topics on different ways of using them
-
-* if throwError is enabled and variable is not in the specified context, error will be thrown
-* "." syntax is supported (ex: variable1.variable2 < Variable 2 must be a Sub Property of variable1) 
-
-#### Defining a variable
-
-> Format to defining a variable is `variable = value`
-
-```
-variable = "string value"
-# or
-variable = functionValue();
-# or
-variable2 = variable
-```
-
-* Value can be a `string / function / another variable`
-* when defining you may override a previously defined variable
-* make sure to define a variable before using it
-* If variable is undefined and throwError is enabled it will throw a Error
-
-#### "." syntax
-
-> "." syntax is simple, see the below example
-
-```
-variable1.variable2
-```
-
-* Here, variable 1 has a sub property called variable2.
-* You can keep chaining these (only if the sub Properties exists)
-* if throwError is enabled and `variable1` is undefined a Error will be thrown
+[Or Click here](https://typicalninja493.github.io/tagscript/guide.html))
 # Support
 
 > This package was made for my own discord bot's ([axix](https://axixbot.cf) v2) custom commands / tags system
