@@ -7,3 +7,4 @@
 .gitignore
 ex.js
 .npmignore
+/docs-editor
