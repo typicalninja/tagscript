@@ -57,8 +57,10 @@ We offer a web bundle that is bundled with [webpack](https://webpack.js.org/) an
 * If possible download this and host on your own website (recommended)
 * If not just use one of the following cdns (not recommended):
 
-[jsdelivr](https://cdn.jsdelivr.net/gh/typicalninja493/tagscript@beta/web/bundle.js) (recommended)
-[statically](https://cdn.statically.io/gh/typicalninja493/tagscript@beta/web/bundle.js)
+> [jsdelivr](https://cdn.jsdelivr.net/gh/typicalninja493/tagscript@beta/web/bundle.js) (recommended)
+
+
+> [statically](https://cdn.statically.io/gh/typicalninja493/tagscript@beta/web/bundle.js)
 
 # Live Demo / Tagscript Editor
 
@@ -129,7 +131,7 @@ runScript('checkIfTrue').then(console.log)
 
 > A Complete guides for users wanting to write their own scripts can be found [here](https://typicalninja493.github.io/tagscript/guide.html)
 
-[Or Click here](https://typicalninja493.github.io/tagscript/guide.html))
+[Or Click here](https://typicalninja493.github.io/tagscript/guide.html)
 # Support
 
 > This package was made for my own discord bot's ([axix](https://axixbot.cf) v2) custom commands / tags system
