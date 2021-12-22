@@ -1,82 +1,182 @@
-<h1 id="user-guide">User guide</h1>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>user guide</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="user-guide">User guide</h1>
 <blockquote>
-<p>A Guide to users who want to write scripts (refer your users if you want to here)</p>
+<p>A Guide to users who want to write scripts</p>
+</blockquote>
+<blockquote>
 <p><strong>Note:</strong> All of the below code is inside {} unless specified</p>
 </blockquote>
 <h2 id="table-of-contents">Table of contents</h2>
 <ol>
-<li><a href="#functions">Functions</a> :<ol>
-<li><a href="#functions-without-params">Functions without params</a></li>
-<li><a href="#functions-with-params">Functions with params</a></li>
-</ol>
+<li>
+<p><a href="#functions">Functions</a> :</p>
 </li>
-<li><a href="#variables">Variables</a><ol>
-<li><a href="#defining-a-variable">Defining a variable</a></li>
-<li><a href="#quotquot-syntax">&quot;.&quot; Syntax</a><h3 id="functions">Functions</h3>
+<li>
+<p><a href="#functions-without-params">Functions without params</a></p>
+</li>
+<li>
+<p><a href="#functions-with-params">Functions with params</a></p>
+</li>
+<li>
+<p><a href="#variables">Variables</a></p>
+</li>
+<li>
+<p><a href="#defining-a-variable">Defining a variable</a></p>
+</li>
+<li>
+<p><a href="#quotquot-syntax">“.” Syntax</a></p>
 </li>
 </ol>
-</li>
-</ol>
+<hr>
+<h3 id="functions">Functions</h3>
 <blockquote>
 <p>You can call functions as demonstrated below</p>
 </blockquote>
 <ul>
-<li>The Important part to call the Function is &quot;()&quot;</li>
-<li>make sure there no spaces between &quot;function name&quot; and &quot;()&quot;</li>
-<li>if throwError is enabled and there is no function name that, a error will be thrown</li>
-<li>by default there are no functions defined</li>
-<li>And you (as the user writing script) cant define functions</li>
+<li>
+<p>The Important part to call the Function is “()”</p>
+</li>
+<li>
+<p>make sure there no spaces between “function name” and “()”</p>
+</li>
+<li>
+<p>if throwError is <strong>enabled</strong> and there is no function name that, a error will be thrown</p>
+</li>
+<li>
+<p>by default there are no functions defined</p>
+</li>
+<li>
+<p>And you (as the user writing script) cant define functions</p>
+</li>
 </ul>
 <h4 id="functions-without-params">Functions without params</h4>
 <blockquote>
 <p>functions without params are called normally like below</p>
 </blockquote>
-<pre><code>    <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span></span>
-</code></pre><ul>
-<li>A Function without anything in between &quot;()&quot; is a Function without params</li>
-<li>Passing no params to a function that expects param&#39;s might throw a Error (depends on the function)<h4 id="functions-with-params">Functions with params</h4>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>
+<p>A Function <strong>without</strong> anything in between “()” is a Function <strong>without</strong> parameters</p>
+</li>
+<li>
+<p>Passing no parameters to a function that expects parameter’s might throw a Error (depends on the function)</p>
 </li>
 </ul>
+<h4 id="functions-with-parameters">Functions with parameters</h4>
 <blockquote>
-<p>Functions with params are bit different but not complex</p>
+<p>Functions with parameters are bit different but not complex</p>
 </blockquote>
-<pre><code>    <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(&lt;param&gt;, &lt;param&gt;)</span></span>
-</code></pre><ul>
-<li>Define functions params inside &quot;()&quot;</li>
-<li>separate each param by a &quot;,&quot;</li>
-<li>strings should be between acceptable string start and ends characters (&quot;, &#39;)</li>
-<li>functions in param&#39;s is <strong>Supported</strong> but is not guaranteed to be stable and fast</li>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>param<span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">&lt;</span>param<span class="token operator">&gt;</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>
+<p>Define functions parameters inside “()”</p>
+</li>
+<li>
+<p>Each parameter <strong>Must</strong> be seperated by a <code>,</code></p>
+</li>
+<li>
+<p>strings should be between acceptable string start and ends characters (<code>"</code>, <code>'</code>)</p>
+</li>
+<li>
+<p>functions in parameter’s is <strong>Supported</strong> but is <strong>not</strong> guaranteed to be stable and fast</p>
+</li>
 </ul>
 <h3 id="variables">Variables</h3>
 <blockquote>
 <p>see the below sub topics on different ways of using them</p>
 </blockquote>
 <ul>
-<li>if throwError is enabled and variable is not in the specified context, error will be thrown</li>
-<li>&quot;.&quot; syntax is supported (ex: variable1.variable2 &lt; Variable 2 must be a Sub Property of variable1) </li>
+<li>
+<p>if throwError is <strong>enabled</strong> and variable is not in the specified context, error will be thrown</p>
+</li>
+<li>
+<p>“.” syntax is supported (ex: <code>variable1.variable2</code> &lt; Variable 2 <strong>must</strong> be a <strong>Sub</strong> Property of <strong>variable1</strong>)</p>
+</li>
 </ul>
 <h4 id="defining-a-variable">Defining a variable</h4>
 <blockquote>
 <p>Format to defining a variable is <code>variable = value</code></p>
 </blockquote>
-<pre><code><span class="hljs-attr">variable</span> = <span class="hljs-string">"string value"</span>
-<span class="hljs-comment"># or</span>
-<span class="hljs-attr">variable</span> = functionValue();
-<span class="hljs-comment"># or</span>
-<span class="hljs-attr">variable2</span> = variable
-</code></pre><ul>
-<li>Value can be a <code>string / function / another variable</code></li>
-<li>when defining you may override a previously defined variable</li>
-<li>make sure to define a variable before using it</li>
-<li>If variable is undefined and throwError is enabled it will throw a Error</li>
+<pre class=" language-js"><code class="prism  language-js">variable <span class="token operator">=</span> <span class="token string">"string value"</span>
+
+# or
+
+variable <span class="token operator">=</span> <span class="token function">functionValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+# or
+
+variable2 <span class="token operator">=</span> variable
+</code></pre>
+<ul>
+<li>
+<p>Value can be a <code>string / function / another variable</code></p>
+</li>
+<li>
+<p>when defining you may override a previously defined variable</p>
+</li>
+<li>
+<p>make sure to define a variable before using it</p>
+</li>
+<li>
+<p>If variable is undefined and throwError is enabled it will throw a Error</p>
+</li>
 </ul>
-<h4 id="-syntax">&quot;.&quot; syntax</h4>
+<h4 id="syntax">" . " syntax</h4>
 <blockquote>
-<p>&quot;.&quot; syntax is simple, see the below example</p>
+<p>“.” syntax is simple, see the below example</p>
 </blockquote>
-<pre><code><span class="hljs-keyword">variable</span><span class="hljs-number">1</span>.<span class="hljs-keyword">variable</span><span class="hljs-number">2</span>
-</code></pre><ul>
-<li>Here, variable 1 has a sub property called variable2.</li>
-<li>You can keep chaining these (only if the sub Properties exists)</li>
-<li>if throwError is enabled and <code>variable1</code> is undefined a Error will be thrown</li>
+<pre><code>variable1.variable2
+</code></pre>
+<ul>
+<li>
+<p>Here, variable 1 has a sub property called variable2.</p>
+</li>
+<li>
+<p>You can keep chaining these (only if the sub Properties exists)</p>
+</li>
+<li>
+<p>if throwError is enabled and <code>variable1</code> is undefined a Error will be thrown</p>
+</li>
 </ul>
+<h3 id="strings">Strings</h3>
+<blockquote>
+<p>Version 2 Introduce new types to tagscript this includes string<br>
+<strong>NOTE:</strong> In <strong>older</strong> (v <code>1</code>) versions expressions that were not a variable was taken as a string and did <strong>not</strong> have a special way of defining them. in new versions (v2 and ^) you <strong>must</strong> keep strings between start and end characters of strings<br>
+Start and end Characters are : <code>"</code> | <code>'</code>, either one of this must be used to end and start of a string</p>
+</blockquote>
+<p><code>EX</code>:</p>
+<ol>
+<li>"this is a string:</li>
+<li>‘this is a string’</li>
+<li>this is not a string</li>
+</ol>
+<h4 id="variables-in-strings">Variables in strings</h4>
+<blockquote>
+<p>(<strong>YAY</strong>) You can now use (v <code>2</code> and ^) variables in strings</p>
+</blockquote>
+<p><code>EX</code>: “is this a string, $(isit)”</p>
+<blockquote>
+<p>here <code>istit</code> will be a variable (<code>ex</code>: <code>{isit = "yes it is"}</code> )<br>
+<strong>NOTE</strong>: calling functions inside string is still in testing, mean while call function outside of the string and apply the result to a variable<br>
+<code>EX</code>:</p>
+</blockquote>
+<pre class=" language-js"><code class="prism  language-js"><span class="token punctuation">{</span>result <span class="token operator">=</span> <span class="token function">getSomeCatPictures</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+here are some urls to cat pictures
+<span class="token punctuation">{</span><span class="token string">"there are super cute : ) $(result)"</span><span class="token punctuation">}</span>
+</code></pre>
+</div>
+</body>
+
+</html>

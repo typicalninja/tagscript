@@ -8,7 +8,7 @@ parser.register(extension, { start: ';', end: ';' });
 
 const testScript = `
 this is a test Script
-{detected = "should support ; as strings"}
+{detected = "should support as string"}
 Result >> {;is a string, $(detected);}
 `
 

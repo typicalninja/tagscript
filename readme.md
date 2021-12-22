@@ -55,7 +55,7 @@ ctx.parse(script).then(console.log).catch(console.log)
 We offer a web bundle that is bundled with [webpack](https://webpack.js.org/) and is available at the following cdns
 
 * If possible download this and host on your own website (recommended)
-* If not just use one of the following cdns (not recommended):
+* If not just directly use one of the following cdns (not recommended):
 
 > [jsdelivr](https://cdn.jsdelivr.net/gh/typicalninja493/tagscript@beta/web/bundle.js) (recommended)
 
@@ -67,6 +67,14 @@ We offer a web bundle that is bundled with [webpack](https://webpack.js.org/) an
 You can find a Live Demo / Tagscript Editor [here](https://typicalninja493.github.io/tagscript/editor.html)
 
 > The editor utilizes the web [bundle](#using-from-the-web) 
+
+# Extensions
+
+> Yess, this library allows you to extend it's functionality without directly interacting with the source code
+
+> [here](https://typicalninja493.github.io/tagscript/extension.html) is A simple Guide on this Subject
+
+> [Click for guide](https://typicalninja493.github.io/tagscript/extension.html)
 # Providing Static props
 
 > Static props is a object containing data about a expression (script / string you provide). it contains data about expression type and whats contained.Static props are unique between different expressions, but same with every expression
@@ -132,6 +140,7 @@ runScript('checkIfTrue').then(console.log)
 > A Complete guides for users wanting to write their own scripts can be found [here](https://typicalninja493.github.io/tagscript/guide.html)
 
 [Or Click here](https://typicalninja493.github.io/tagscript/guide.html)
+
 # Support
 
 > This package was made for my own discord bot's ([axix](https://axixbot.cf) v2) custom commands / tags system

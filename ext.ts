@@ -144,7 +144,7 @@ const createLoadExtensionData = (extensionUnknownData: any) => {
 		onLoad: { value: onLoad, enumerable: true, writable: false },
 		staticGeneratorExtensions: { value: getStaticExtensionData() || [], enumerable: true, writable: false },
 		interpreterExtensions: { value: getInterpreterExtensionData() || [], enumerable: true, writable: false },
-	})
+	});
 	return final as { name: string, onLoad: () => void, staticGeneratorExtensions: { type: string, test: Function, getData: Function  }[], interpreterExtensions: { type: string, handler: Function }[] }
 }
 

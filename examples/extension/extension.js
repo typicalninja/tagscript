@@ -1,4 +1,4 @@
-const { createLoadExtensionData } = require('../../dist/index');
+const { createLoadExtensionData, cleanString } = require('../../dist/index');
 
 /* 
 Example: This is a example of a tagscript extension.
@@ -35,7 +35,10 @@ class Extension {
 		this.end = this.options.end || ';'
 		// normally this would not be placed here, but for the example it is
 		// TYPE_STRING_EXTENDED will be the type used here as its not the best to make in a built in type (TYPE_STRING)
-		this.type = 'TYPE_STRING_EXTENDED';
+		// string_type is the type used to identify a expression as a string
+		this.string_type = 'TYPE_STRING_EXTENDED';
+		// declaration_type is the type used to identify a declaration in a expression with our custom delimiters
+		this.declaration_type = 'TYPE_DECLARATION_EXTENDED';
 		// create a regex to detect things between the start and end (;, ;)
 		this.regex = new RegExp(`^${this.start}[^${this.start}]*${this.end}`, 'im')
 	}
@@ -44,12 +47,14 @@ class Extension {
 		return console.log(`${this.name} Loaded`)
 		// can use to alert a user if the extension loaded
 	}
+	// for testing a expression
 	testStaticExtension(exp) {
 		return this.regex.test(exp)
 	}
 	handleInterpreter(ctx, strData) {
 		return makeString(ctx, strData.name, { end: this.end, start: this.start })
 	}
+	// this is the static extension handlers data getter for strings
 	getStaticExtension(exp) {
 		// this extension does not have much so this is enough
 		return {
@@ -57,10 +62,11 @@ class Extension {
 			type: this.type
 		}
 	}
+	// these methods are for the creatLoadExtensionData function, and is for all the handlers
 	getStaticExtensionData() {
 		return [
 			{
-				type: this.type,
+				type: this.string_type,
 				test: this.testStaticExtension.bind(this),
 				getData: this.getStaticExtension.bind(this)
 			}
