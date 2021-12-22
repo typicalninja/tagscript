@@ -35,10 +35,7 @@ class Extension {
 		this.end = this.options.end || ';'
 		// normally this would not be placed here, but for the example it is
 		// TYPE_STRING_EXTENDED will be the type used here as its not the best to make in a built in type (TYPE_STRING)
-		// string_type is the type used to identify a expression as a string
-		this.string_type = 'TYPE_STRING_EXTENDED';
-		// declaration_type is the type used to identify a declaration in a expression with our custom delimiters
-		this.declaration_type = 'TYPE_DECLARATION_EXTENDED';
+		this.type = 'TYPE_STRING_EXTENDED';
 		// create a regex to detect things between the start and end (;, ;)
 		this.regex = new RegExp(`^${this.start}[^${this.start}]*${this.end}`, 'im')
 	}
@@ -66,7 +63,7 @@ class Extension {
 	getStaticExtensionData() {
 		return [
 			{
-				type: this.string_type,
+				type: this.type,
 				test: this.testStaticExtension.bind(this),
 				getData: this.getStaticExtension.bind(this)
 			}

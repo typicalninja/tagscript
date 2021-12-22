@@ -4,40 +4,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>user guide</title>
+  <title>User guide</title>
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><h1 id="user-guide">User guide</h1>
+  <div class="stackedit__html"><p><a href="/tagscript"><strong>&lt; Back</strong></a></p>
+<h1 id="user-guide">User guide</h1>
 <blockquote>
-<p>A Guide to users who want to write scripts</p>
+<p>A Guide to users who want to write scripts (refer your users if you want to here)</p>
 </blockquote>
 <blockquote>
 <p><strong>Note:</strong> All of the below code is inside {} unless specified</p>
 </blockquote>
 <h2 id="table-of-contents">Table of contents</h2>
 <ol>
-<li>
-<p><a href="#functions">Functions</a> :</p>
+<li><a href="#functions"><strong>Functions</strong></a> :
+<ol>
+<li><a href="#functions-without-params"><em>Functions without params</em></a></li>
+<li><a href="#functions-with-params"><em>Functions with params</em></a></li>
+</ol>
 </li>
-<li>
-<p><a href="#functions-without-params">Functions without params</a></p>
+<li><a href="#variables"><strong>Variables</strong></a>
+<ol>
+<li><a href="#defining-a-variable"><em>Defining a variable</em></a></li>
+<li><a href="#quotquot-syntax"><em>" . " Syntax</em></a></li>
+</ol>
 </li>
-<li>
-<p><a href="#functions-with-params">Functions with params</a></p>
-</li>
-<li>
-<p><a href="#variables">Variables</a></p>
-</li>
-<li>
-<p><a href="#defining-a-variable">Defining a variable</a></p>
-</li>
-<li>
-<p><a href="#quotquot-syntax">“.” Syntax</a></p>
+<li><a href="#strings"><strong>Strings</strong></a>
+<ol>
+<li><a href="variables-in-strings"><em>Variables in strings</em></a></li>
+</ol>
 </li>
 </ol>
-<hr>
 <h3 id="functions">Functions</h3>
 <blockquote>
 <p>You can call functions as demonstrated below</p>
@@ -50,7 +49,7 @@
 <p>make sure there no spaces between “function name” and “()”</p>
 </li>
 <li>
-<p>if throwError is <strong>enabled</strong> and there is no function name that, a error will be thrown</p>
+<p>if throwError is enabled and there is no function name that, a error will be thrown</p>
 </li>
 <li>
 <p>by default there are no functions defined</p>
@@ -67,30 +66,30 @@
 </code></pre>
 <ul>
 <li>
-<p>A Function <strong>without</strong> anything in between “()” is a Function <strong>without</strong> parameters</p>
+<p>A Function without anything in between “()” is a Function without params</p>
 </li>
 <li>
-<p>Passing no parameters to a function that expects parameter’s might throw a Error (depends on the function)</p>
+<p>Passing no params to a function that expects param’s might throw a Error (depends on the function)</p>
 </li>
 </ul>
-<h4 id="functions-with-parameters">Functions with parameters</h4>
+<h4 id="functions-with-params">Functions with params</h4>
 <blockquote>
-<p>Functions with parameters are bit different but not complex</p>
+<p>Functions with params are bit different but not complex</p>
 </blockquote>
 <pre class=" language-js"><code class="prism  language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>param<span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">&lt;</span>param<span class="token operator">&gt;</span><span class="token punctuation">)</span>
 </code></pre>
 <ul>
 <li>
-<p>Define functions parameters inside “()”</p>
+<p>Define functions params inside “()”</p>
 </li>
 <li>
-<p>Each parameter <strong>Must</strong> be seperated by a <code>,</code></p>
+<p>separate each param by a “,”</p>
 </li>
 <li>
-<p>strings should be between acceptable string start and ends characters (<code>"</code>, <code>'</code>)</p>
+<p>strings should be between acceptable string start and ends characters (", ')</p>
 </li>
 <li>
-<p>functions in parameter’s is <strong>Supported</strong> but is <strong>not</strong> guaranteed to be stable and fast</p>
+<p>functions in param’s is <strong>Supported</strong> but is not guaranteed to be stable and fast</p>
 </li>
 </ul>
 <h3 id="variables">Variables</h3>
@@ -99,10 +98,10 @@
 </blockquote>
 <ul>
 <li>
-<p>if throwError is <strong>enabled</strong> and variable is not in the specified context, error will be thrown</p>
+<p>if throwError is enabled and variable is not in the specified context, error will be thrown</p>
 </li>
 <li>
-<p>“.” syntax is supported (ex: <code>variable1.variable2</code> &lt; Variable 2 <strong>must</strong> be a <strong>Sub</strong> Property of <strong>variable1</strong>)</p>
+<p>“.” syntax is supported (ex: variable1.variable2 &lt; Variable 2 must be a Sub Property of variable1)</p>
 </li>
 </ul>
 <h4 id="defining-a-variable">Defining a variable</h4>
@@ -133,11 +132,13 @@ variable2 <span class="token operator">=</span> variable
 <p>If variable is undefined and throwError is enabled it will throw a Error</p>
 </li>
 </ul>
-<h4 id="syntax">" . " syntax</h4>
+<h4 id="syntax">“.” syntax</h4>
 <blockquote>
 <p>“.” syntax is simple, see the below example</p>
 </blockquote>
-<pre><code>variable1.variable2
+<pre><code>
+variable1.variable2
+
 </code></pre>
 <ul>
 <li>
@@ -175,6 +176,7 @@ Start and end Characters are : <code>"</code> | <code>'</code>, either one of th
 <pre class=" language-js"><code class="prism  language-js"><span class="token punctuation">{</span>result <span class="token operator">=</span> <span class="token function">getSomeCatPictures</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
 here are some urls to cat pictures
 <span class="token punctuation">{</span><span class="token string">"there are super cute : ) $(result)"</span><span class="token punctuation">}</span>
+
 </code></pre>
 </div>
 </body>

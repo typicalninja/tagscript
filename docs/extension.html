@@ -4,12 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>test</title>
+  <title>Extensions guide</title>
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><h1 id="extensions">Extensions</h1>
+  <div class="stackedit__html"><h2 id="home"><a href="/tagscript"><strong>&lt; Home</strong></a></h2>
+<h1 id="extensions">Extensions</h1>
 <ul>
 <li>One The most exciting feature of v2 is Extensions. it allows you to extend tagscript without messing with the internal code, or allows you to add 3rd party extensions too.</li>
 </ul>
@@ -61,36 +62,7 @@ Fully working extension is <a href="https://github.com/typicalninja493/tagscript
 		<span class="token function">constructor</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 			<span class="token keyword">this</span><span class="token punctuation">.</span>options <span class="token operator">=</span> options
 		<span class="token punctuation">}</span>
-		<span class="token function">onLoad</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token comment">// called once extension gets loaded, optional (maybe dont log to console without a option asking weather to)</span>
-			<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>options<span class="token punctuation">.</span>log<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-				<span class="token keyword">return</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'Plugin loaded'</span><span class="token punctuation">)</span>
-			<span class="token punctuation">}</span>
-		<span class="token punctuation">}</span>
-		<span class="token comment">// getStaticExtensionData is a standard property used by createLoadExtensionData</span>
-		<span class="token comment">// this method is used to provide data regarding Extensions to Static Data Generator</span>
-		<span class="token function">getStaticExtensionData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-		<span class="token comment">// these parts depends on your extension and what it does</span>
-			<span class="token keyword">return</span> <span class="token punctuation">[</span>
-					<span class="token punctuation">{</span>
-					type<span class="token punctuation">:</span> <span class="token string">'TYPE_WHATEVER'</span><span class="token punctuation">,</span>
-					test<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token string">'some kind of function to test a string / Expression (maybe against a regex)'</span><span class="token punctuation">,</span>
-					getData<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token string">'some kind of function returning the  data (object with respective fields) to store in the Static Object if "test" returns true'</span>
-					<span class="token punctuation">}</span>
-				<span class="token punctuation">]</span>
-		<span class="token punctuation">}</span>
-		<span class="token comment">// getInterpreterExtensionData is a standard property used by createLoadExtensionData</span>
-		<span class="token comment">// this method is used to provide data regarding Extensions to interpreter</span>
-		<span class="token function">getInterpreterExtensionData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-			<span class="token comment">// these parts depends on your extension and what it does</span>
-			<span class="token keyword">return</span> <span class="token punctuation">[</span>
-					<span class="token punctuation">{</span>
-						type<span class="token punctuation">:</span> <span class="token string">'TYPE_WHATEVER'</span>
-						handler<span class="token punctuation">:</span>  <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token string">'some kind of handler'</span>
-					<span class="token punctuation">}</span>
-				<span class="token punctuation">]</span>
-		<span class="token punctuation">}</span>
- <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 <span class="token keyword">function</span> <span class="token function">loadExtension</span><span class="token punctuation">(</span>options<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 	<span class="token comment">// options is passed as a param</span>
