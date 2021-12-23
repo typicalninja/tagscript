@@ -75,66 +75,11 @@ You can find a Live Demo / Tagscript Editor [here](https://typicalninja493.githu
 > [here](https://typicalninja493.github.io/tagscript/extension.html) is A simple Guide on this Subject
 
 > [Click for guide](https://typicalninja493.github.io/tagscript/extension.html)
-# Providing Static props
 
-> Static props is a object containing data about a expression (script / string you provide). it contains data about expression type and whats contained.Static props are unique between different expressions, but same with every expression
+# Optimizing / Providing Pre gen static Data
 
-**example:**
-
-```ts
-const script1 = `
-{"this is a example"}
-`
-
-const script2 = `
-{exampleFUNC()}
-`
-```
-
-> Here `script1` 's static prop Object will be different from `script2`'s static Prop Object. but when u generate a new **Static object** for script1 it will still be equal to the earlier generated **Static Prop** of `script1`, same will be said for `script2`
-
-
-### Using this for our advantage
-
-> As said in the main title, we can provide a static object our selves to our parser. if we do not provide one the parser will take time to generate one **itself** and run it.we can save the time it takes to generate a **Static Prop object** by storing a previously generated **Static Prop Object** to our storage (Database) with the rest our data 
-
-**Example (Following is not a complete code, just a example)**
-
-```ts
-// first import all the things we need
-import { Parser, getStaticProps } from '@typicalninja21/tagscript'
-
-const db = /* What ever your db is here */
-
-const parser = new Parser({
-	throwError: true
-});
-
-function saveScript(scriptName, script) {
-	return db.save(scriptName, {
-		script,
-		runnable: getStaticProps(script),
-		/*Some other data here...*/
-	})
-}
-
-function runScript() {
-const scriptData = db.get('checkIfTrue');
-
-// we will assume db.get (scriptData) will return the value we stores using saveScript()
-	const ctx = parser.getNewCtx();
-
-  /*Add Variables and stuff here (do your usual stuff here) */
-  // finally parse
-  return ctx.parse(scriptData.script, scriptData.runnable)
-}
-
-
-// first save the script
-saveScript('checkIfTrue', `{checkTrue(true)}`)
-runScript('checkIfTrue').then(console.log)
-```
-
+> You can click [here](https://typicalninja493.github.io/tagscript/static.html) for guide on this topic
+> or [Click here for guide](https://typicalninja493.github.io/tagscript/static.html)
 # User Guide
 
 > A Complete guides for users wanting to write their own scripts can be found [here](https://typicalninja493.github.io/tagscript/guide.html)
