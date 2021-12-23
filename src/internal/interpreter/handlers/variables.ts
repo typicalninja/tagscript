@@ -62,7 +62,6 @@ export const handler_DEC = async (ctx: { [key: string]: string | undefined } | u
 					configurable: true,
 					writable: true,
 				});
-				//console.log('d:', c)
 			break;
 		}
 		if(type == exp_types.string) return '';
