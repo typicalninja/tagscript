@@ -7,6 +7,7 @@ import util from 'util';
 import { exp_types } from "../../constants";
 import { makeString } from "./string";
 import { default as getHandler } from './index';
+import { updateVM } from "../vm";
 
 export const accessVariables = (ctx: { [key: string]: string | undefined } | undefined | string, runner: Interpreter, variables: string[]) => {
 	let c = ctx;
@@ -40,6 +41,7 @@ export const handler_DEC = async (ctx: { [key: string]: string | undefined } | u
 			case exp_types.string:
 				// @ts-ignore
 				c[varData.name] = makeString(ctx, vals.name)
+				updateVM(c)
 			break;
 			case exp_types.variables:
 				const variable = accessVariables(ctx, runner, vals.variableAccess);
@@ -50,6 +52,7 @@ export const handler_DEC = async (ctx: { [key: string]: string | undefined } | u
 					configurable: true,
 					writable: true,
 				});
+				updateVM(c)
 			break;
 			case exp_types.function_withParams:
 			case exp_types.function_withoutParams:
@@ -62,6 +65,8 @@ export const handler_DEC = async (ctx: { [key: string]: string | undefined } | u
 					configurable: true,
 					writable: true,
 				});
+				// update the vm
+				updateVM(c)
 			break;
 		}
 		if(type == exp_types.string) return '';

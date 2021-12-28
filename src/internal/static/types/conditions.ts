@@ -42,7 +42,7 @@ export const match = (str: string) => {
 export const parseChain = (str: string) => {
 	const matches = match(str)
 	const PRE_IF = regexps[0].test(matches[0]) ? matches[0] : null
-	if(!PRE_IF) throw new Error(`Condition chain must start with a 'if' condition`)
+	if(!PRE_IF) return null
 	const PRE_ELSE = regexps[2].test(matches[matches.length - 1]) ? matches[matches.length - 1] : null
 	matches.shift()
 	// if ELse is present then the last element is the else, remove it so only ELSE_IFs remain
@@ -63,7 +63,7 @@ export const parseChain = (str: string) => {
 	});
 
 	if(PRE_ELSE) {
-		if(!PRE_ELSE.match(conditionCodeRegex)) throw new Error(`Condition chain 'else' condition does not contain code to run`)
+		if(!PRE_ELSE.match(conditionCodeRegex)) return;
 		Object.defineProperties(data.ELSE, {
 			raw: { value: PRE_ELSE, enumerable: true },
 			run: { value: PRE_ELSE.match(conditionCodeRegex)![0]?.slice(1, -1)?.replace(' ', ''), enumerable: true }

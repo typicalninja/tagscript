@@ -44,7 +44,7 @@ export default (str: string, parser: Parser | null): { raw: string; templates: {
 
 		Object.defineProperties(tag_DAT, {
 			raw: {
-				value: cleanString(tag),
+				value: tag,
 				writable: false,
 				enumerable: true
 			},

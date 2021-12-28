@@ -62,6 +62,7 @@ export const getData = (exp: string, type: string,  parser: Parser | null) => {
 		break
 		case exp_types.condition:
 			const conditions = parseChain(exp)
+			if(!conditions) break;
 			Object.defineProperties(data, {
 				type: { value: type, enumerable: true, writable: false },
 				IF: { value: conditions.IF, enumerable: true, writable: false },
@@ -70,11 +71,6 @@ export const getData = (exp: string, type: string,  parser: Parser | null) => {
 				//conditions: { value: conditions, enumerable: true, writable: false },
 			});
 		break;
-	/*	case exp_types.variables:
-			Object.defineProperties(data, {
-				type: { value: exp_types.variables, writable: false, enumerable: true },
-				name: { value: exp, enumerable: true },
-			})*/
 		default:
 			const getStaticExpr = parser?.extensionManager?.getStaticExpression?.bind(parser?.extensionManager) || (() => ({ name: 'unknown', type: 'UNKNOWN' }));
 			const staticExpr = getStaticExpr(type)
