@@ -6,22 +6,23 @@
 import { exp_types } from "../../constants";
 import { cleanString } from "../../utils";
 // test functions for various expr types
-import { test as testFunction, hasParams, functionParamsRegex } from "./function";
+import { test as testFunction, hasParams } from "./function";
 import { test as testString } from "./string";
 import { test as testDeclaration } from "./variable";
-import { match, test as testCondition } from "./conditions";
+import { match, test as testCondition, parseChain } from "./conditions";
 import Parser from "../../../parser";
 
 
 export const getTypes = (expression: string, parser: Parser | null) => {
 	const extensionTestFunc = parser?.extensionManager?.testStaticExpression?.bind(parser?.extensionManager) || (() => false);
-	const type = extensionTestFunc(expression) || (testString(expression) ? testCondition(expression) ? exp_types.condition : exp_types.string : testDeclaration(expression) ? exp_types.declaration : testFunction(expression) ? hasParams(expression) ? exp_types.function_withParams : exp_types.function_withoutParams : exp_types.unknown)
+	//const type = extensionTestFunc(expression) || (testString(expression) ? testCondition(expression) ? exp_types.condition : exp_types.string : testDeclaration(expression) ? exp_types.declaration : testFunction(expression) ? hasParams(expression) ? exp_types.function_withParams : exp_types.function_withoutParams : exp_types.unknown)
+	const type = extensionTestFunc(expression) || (testString(expression) ? exp_types.string : false) || (testCondition(expression) ? exp_types.condition : false) || (testDeclaration(expression) ? exp_types.declaration : false) || (testFunction(expression) ? hasParams(expression) ? exp_types.function_withParams : exp_types.function_withoutParams : false) || exp_types.unknown
 	return type;
 }
 
 // parse a exp and return data about it, this is not aware of any context, just parses them by their type
 export const getData = (exp: string, type: string,  parser: Parser | null) => {
-	let data = { name: 'unknown', type: type }
+	let data = { name: exp, type: type }
 	// type can be a custom type provided by a extension, handle them in default section
 	switch(type) {
 		case exp_types.function_withParams:
@@ -60,14 +61,13 @@ export const getData = (exp: string, type: string,  parser: Parser | null) => {
 		});
 		break
 		case exp_types.condition:
-			const conditions = match(exp)
-			// if there is no "if():" its not a valid condition block
-			if(!conditions[0]) break;
+			const conditions = parseChain(exp)
 			Object.defineProperties(data, {
 				type: { value: type, enumerable: true, writable: false },
-				if: { value: conditions[0], enumerable: true, writable: false },
-				else_if: { value: conditions[1], enumerable: true, writable: false },
-				else: { value: conditions[2], enumerable: true, writable: false }
+				IF: { value: conditions.IF, enumerable: true, writable: false },
+				ELSE_IFS: { value: conditions.ELSE_IFS, enumerable: true, writable: false },
+				ELSE: { value: conditions.ELSE, enumerable: true, writable: false },
+				//conditions: { value: conditions, enumerable: true, writable: false },
 			});
 		break;
 	/*	case exp_types.variables:
