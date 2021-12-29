@@ -4,6 +4,7 @@
  * END: :
  */
 import { getTypes } from './index'
+import { condition_types } from '../../constants';
 
 // .... - We just provide the regex directly
 export const start = ['\\s*?if', '\\s*?elseIF', '....'];
@@ -13,14 +14,14 @@ export const end = [':'];
  const conditionCodeRegex = /:(.*?):/gi
 
  // equals
- const CONDITION_L_EQUAL = /'?[a-zA-Z]+'?\s+?==\s+?[a-zA-Z]+/gm
- const CONDITION_S_EQUAL = /'?[a-zA-Z]+'?\s+?===\s+?[a-zA-Z]+/gm
+ const CONDITION_L_EQUAL = /'?[a-zA-Z-0-9]+'?\s+?==\s+?[a-zA-Z]+/gm
+ const CONDITION_S_EQUAL = /'?[a-zA-Z-0-9]+'?\s+?===\s+?[a-zA-Z]+/gm
  // numeric
- const CONDITION_GREATER = /'?[a-zA-Z]+'?\s+?>\s+?[a-zA-Z]+/gm
- const CONDITION_LESS = /'?[a-zA-Z]+'?\s+?>\s+?[a-zA-Z]+/gm
+ const CONDITION_GREATER = /'?[a-zA-Z-0-9]+'?\s+?>\s+?[a-zA-Z]+/gm
+ const CONDITION_LESS = /'?[a-zA-Z-0-9]+'?\s+?>\s+?[a-zA-Z]+/gm
 
- const CONDITION_GREATER_EQUAL = /'?[a-zA-Z]+'?\s+?>=\s+?[a-zA-Z]+/gm
- const CONDITION_LESS_EQUAL = /'?[a-zA-Z]+'?\s+?<=\s+?[a-zA-Z]+/gm
+ const CONDITION_GREATER_EQUAL = /'?[a-zA-Z-0-9]+'?\s+?>=\s+?[a-zA-Z]+/gm
+ const CONDITION_LESS_EQUAL = /'?[a-zA-Z-0-9]+'?\s+?<=\s+?[a-zA-Z]+/gm
 
 export const regexps = start.map((start, i) => {
 	// else does not contain the "()"
@@ -52,16 +53,15 @@ export const getConditionData = (str: string) => {
 	// create a object to attach the final data to
 	const data = Object.create(null)
 	// determine the type using regex's we defined above
-	const type = (CONDITION_GREATER_EQUAL.test(str) ? 'TYPE_CONDITION_GREATER_EQUAL' : false) || (CONDITION_GREATER.test(str) ? 'TYPE_CONDITION_GREATER' : false) || (CONDITION_LESS_EQUAL.test(str) ? 'TYPE_CONDITION_LESS_EQUAL' : false) || (CONDITION_LESS.test(str) ? 'TYPE_CONDITION_LESS' : false) || (CONDITION_L_EQUAL.test(str) ? 'TYPE_CONDITION_EQUAL' : false) || (CONDITION_S_EQUAL.test(str) ? 'TYPE_CONDITION_STRICT_EQUAL' : false) || 'TYPE_CONDITION_UNKNOWN'
+	const type = (CONDITION_GREATER_EQUAL.test(str) ? condition_types.greater_equal : false) || (CONDITION_GREATER.test(str) ? condition_types.greater : false) || (CONDITION_LESS_EQUAL.test(str) ? condition_types.lesser_equal : false) || (CONDITION_LESS.test(str) ? condition_types.lesser : false) || (CONDITION_L_EQUAL.test(str) ? condition_types.equal : false) || (CONDITION_S_EQUAL.test(str) ? condition_types.strict_equal : false) || condition_types.unknown
 	// determine the operator using the type
-	const splitItem = type === 'TYPE_CONDITION_EQUAL' ? '==' : type === 'TYPE_CONDITION_STRICT_EQUAL' ? '===' : type === 'TYPE_CONDITION_GREATER' ? '>' :  type === 'TYPE_CONDITION_GREATER_EQUAL' ? '>=' : type === 'TYPE_CONDITION_LESS' ? '<' : type === 'TYPE_CONDITION_LESS_EQUAL' ? '<=' : '';
+	const splitItem = type === condition_types.equal ? '==' : type === condition_types.strict_equal ? '===' : type === condition_types.greater ? '>' :  type === condition_types.greater_equal ? '>=' : type === condition_types.lesser ? '<' : type === condition_types.lesser_equal ? '<=' : '--/';
 	// split from the operator to get the 2 parts of a condition
 	const splitted = str.split(splitItem)
-
 	Object.defineProperties(data, {
 		type: { value: type, enumerable: true, writable: false },
 		operator: { value: splitItem, enumerable: true, writable: false },
-		items: { value: type === 'TYPE_CONDITION_UNKNOWN' ? [] : splitted.map(sp => ({ type: getTypes(sp, null), raw: sp, })), enumerable: true, writable: false }
+		items: { value: type === condition_types.unknown ? [] : splitted.map(sp => ({ type: getTypes(sp, null), raw: sp, })), enumerable: true, writable: false }
 	});
 
 	return data;
