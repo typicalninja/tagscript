@@ -1,14 +1,18 @@
 import { VM } from 'vm2';
 
 const vm = new VM({
-	timeout: 9000,
+	timeout: 5000,
 	eval: false,
+	wasm: false,
 });
 
 
 export const updateVM = (ctx: any) => {
-//	console.log('updated vm:', ctx)
-	return vm.setGlobals(ctx);
+	Object.keys(ctx).forEach(key => {
+		vm.freeze(ctx[key], key)
+	})
+	return ctx;
+	//return vm.setGlobals(ctx);
 }
 
 export default vm;

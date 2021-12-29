@@ -48,6 +48,7 @@ export const getData = (exp: string, type: string,  parser: Parser | null) => {
 		case exp_types.declaration: 
 		const s = exp.split('=')
 		Object.defineProperties(data, {
+			// .map(s => getData(s, getTypes(s, parser), parser))
 			name: { value: cleanString(s[0]), enumerable: true },
 			values: { value: s[1].split(/\./g).map(s => cleanString(s)).map(s => getData(s, getTypes(s, parser), parser)), enumerable: true },
 			type: { value: type, writable: false, enumerable: true },
