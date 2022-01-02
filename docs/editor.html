@@ -1,6 +1,6 @@
 <html>   
 	<head>   
-		<style>       
+		<!--<style>       
 			div {
 				display:inline-block;
 				position:relative;
@@ -15,59 +15,316 @@
 			textarea {
 				display:block;
 			}
+		</style>-->
+		<style>
 		</style>
-	</head>
-	<body style="background-color: black; color: white;">       
-			<div>
-				<h1>Input</h1>
-				<div>
-					<textarea id="txt" cols="70" rows="20" spellcheck=”false”></textarea>
-					<button onclick="onSubmit()">Run</button>
+		<title>Tagscript online Editor</title>
 		
-		 		</div>
-			 <h1>Output</h1>
-				<div>   
-					<textarea id="result" cols="50" rows="20" readonly spellcheck=”false”></textarea>	 
-					<button onclick="clearOutput()">Clear</button>
-				</div>
+		<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
+	</head>
+	<body style="background-color: black; color: white;">    
+		<!-- Using bulma --> 
 
-			<h1>Console</h1>
-				<div>   
-					<textarea id="console" cols="55" rows="30" readonly></textarea>	 
-					<button onclick="clearConsole()">Clear</button>
+			<div class="columns">
+				<div class="column">   
+					<h1 class="title" style="color: white;">Input</h1>
+					<div class="control">
+						<textarea id="txt" spellcheck=”false” class="textarea is-primary" rows="15" style="resize: none;"></textarea>
+						<button class="button is-success is-light is-small is-outlined" onclick="onSubmit()" id="run-button">Run</button>
+						<button class="button is-danger is-light is-small is-outlined" onclick="clearel(document.getElementById('txt'), true, 'Do you want to clear the Editor?')" id="clear-btn">Clear</button>
+		 			</div>
 				</div>
+				<div class="column">
+					<h1 class="title">&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+					<article class="message is-info">
+						<div class="message-header">
+						  <p>Tagscript Editor</p>
+						</div>
+						<div class="message-body">
+						 Welcome to the tagscript editor : )
+						 <br>
+						 Input your code in the input area and click <strong>run</strong>
+						 <br>
+						 Results will be visible in the output area
+						 <br>
+						 This Online Editor uses tagscript <a href="/tagscript/index.html#using-from-the-web">Web bundle</a>
+						 <br>
+						 <p>Data query param is encoded b64</p>
+						 <br>
+						 <p>Made with ♥️ by <a href="https://github.com/typicalninja493"><strong>Typicalinja</strong></a></p>
+						 <div>
+							<br>
+							<strong>Share Url</strong>
+							<p>Use this to share this script between people</p>
+							<input id="shareurl" class="input is-primary" type="text" placeholder="run the editor to get share link" readonly>
+							<button id="copy-btn" class="button is-warning" onclick="copyShareLink()" title="copy">Copy</button>
+							<button class="button is-link" onclick="var l = createShareLink();window.open(l)" title="view">View</button>
+						</div>
+						</div>
+					  </article>
+				</div>
+			</div>
 
-			<h1>Context</h1>
-				<p>Context that gets generated for this script</p>
-				<div>   
-					<textarea id="context" cols="30" rows="10" spellcheck=”false” readonly></textarea>	 
-				</div>
-			<h1>Static Props</h1>
-				<p>Static Props generated for this script</p>
-				<div>   
-					<textarea id="sp" cols="60" rows="60" spellcheck=”false” readonly ></textarea>	 
-				</div>
-
-			<h1>Defaults</h1>
-				<p>Add Defaults for this parser, Since Defaults functions are now included</p>
-				<div>  
-					<h2>Variables</h2>
-					<input type="checkbox" id="version" name="version" value="version" onclick="enableFeature('version')">
-					<label for="version">version</label><br>
-					<h2>Functions</h2>
-					<input type="checkbox" id="math" name="math" value="math" onclick="enableFeature('math')">
-					<label for="math">math</label><br>
-					<input type="checkbox" id="choose" name="choose" value="choose" onclick="enableFeature('choose')">
-					<label for="choose">choose</label><br>
-				</div>
-		</div>
 			
+			<div class="columns">
+				<div class="column">       
+						<!--<h1 class="title" style="color: white;">Console</h1>
+						<textarea id="console" class="textarea is-medium" rows="7" readonly></textarea>	 -->
+						<h1 class="title">&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+						<article class="message ">
+							<div class="message-header">
+							  <p>Console</p>
+							</div>
+							<div class="message-body">
+								<textarea id="console" class="textarea is-normal" rows="6" style="resize: none;" readonly></textarea>
+								<button class="button is-danger is-light is-small is-outlined" onclick="clearel(document.getElementById('console'), true, 'Do you want to clear the console?')">Clear</button>
+							</div>
+						</article>
+				</div>
+				<div class="column">       
+						<h1 class="title" style="color: white;">Output</h1>
+						<textarea id="result" class="textarea is-medium" rows="9" spellcheck=”false” style="resize: none;" readonly></textarea>	 
+						<button class="button is-danger is-light is-small is-outlined" onclick="clearel(document.getElementById('result'), true, 'Do you want to clear the output?')">Clear</button>
+				</div>
+			</div>
 
+			<div class="columns">
+				<div class="column">       
+					<h1 class="title" style="color: white;">Context</h1>
+					<p>Global context this script produces</p>
+					<div>   
+						<textarea id="context" spellcheck=”false” class="textarea is-small" rows="12" style="resize: none;" readonly></textarea>	 
+					</div>
+				</div>
+				<div class="column">    
+					<h1 class="title" style="color: white;">Static Props</h1>
+					<p>Static Props generated for this script</p>
+					<div>   
+						<textarea id="sp" spellcheck=”false” class="textarea is-small" rows="12" style="resize: none;" readonly ></textarea>	 
+					</div>
+				</div>
+			</div>
+
+
+			<div>
+				<article class="message">
+					<div class="message-header">
+					  <p>Controls</p>
+					  <p id="features">0 features enabled</p>
+					</div>
+					<div class="message-body">
+						<h1 class="subtitle">Enable Defaults</h1>
+						<br>
+						<div class="columns">
+								<div class="column">
+										<h1>Variables</h1>
+										<div id="def-var"></div>
+								</div>
+								<div class="column">
+									<h1>Functions</h1>
+									<div id="def-func"></div>
+							</div>
+						</div>
+					</div>
+				  </article>
+			</div>
+			<br>
 	</body>
 	<!-- Import out web bundle for tagscript -->
 	<script src="assets/bundle.js"></script>
 	<!-- Webpack bundle for node.js util inspect -->
 	<script src="assets/inspect.js"></script>
-	<script>let parser=new tagscript.Parser({throwError:!0}),features=[];function enableFeature(e){features.includes(e)?(features.splice(features.indexOf(e),1),tagscript.removeDefaults(parser,[e]),log(`Disabled Default : ${e}`)):(features.push(e),tagscript.addDefaults(parser,features),log(`Enabled Default : ${e}`))}function log(e){return document.getElementById("console").value+="\n\n> "+e,!0}function clearConsole(){return document.getElementById("console").value="",!0}function clearOutput(){return document.getElementById("result").value="",!0}function onSubmit(){log("Submitting...");let e=Date.now(),t=parser.getNewCtx(),n=document.getElementById("txt").value;if(!n||""==n)return log("No Valid input Provided");t.parse(n).then(r=>{if(log(`Parsing complete [Time taken: ${Date.now()-e}ms]`),""==r||!r)return document.getElementById("result").value="<empty result>";document.getElementById("result").value=r,document.getElementById("context").value=inspect.default(t.ctx),document.getElementById("sp").value=JSON.stringify(tagscript.getStaticProps(n),null,4)}).catch(e=>{log(`Error occurred: ${e}`)})};window.onload=function(){clearConsole(),clearOutput(),document.getElementById("txt").value="",document.getElementById("context").value="",document.getElementById("sp").value="",document.getElementById("version").checked=!1,document.getElementById("math").checked=!1,document.getElementById("choose").checked=!1,tagscript.removeDefaults(parser,features),features=[]};
+	<script>
+		let features = [];
+		function load(element) { element.classList.add('is-loading'); }
+		function unload(element) { element.classList.remove('is-loading');}
+		function createShareLink() {
+			const element = document.getElementById('shareurl');
+			const data = btoa(document.getElementById('txt').value);
+			element.value = `${window.location.href.split("?")[0]}?${features.length > 0 ? 'features=' + features.join(',') + '&' : ''}data=${encodeURIComponent(data)}`;
+			return element.value;
+		}
+		function copyShareLink() {
+			const element = document.getElementById('shareurl');
+			load(document.getElementById('copy-btn'));
+			setTimeout(() => {
+				element.select();
+				element.setSelectionRange(0, 99999);
+				navigator.clipboard.writeText(element.value).then(() => {
+					unload(document.getElementById('copy-btn'));
+					element.blur();
+				}).catch(() => {
+					alert('Failed to copy to clipboard');
+				});
+			}, 1000)
+		}
+		function clearel(elemnt, prompt = false, message) {
+			if(prompt) {
+				if(!confirm(message)) {
+					return;
+				} else {
+					elemnt.value = '';
+					elemnt.innerHTML = ''
+				}
+			}
+			else {
+				elemnt.value = '';
+				elemnt.innerHTML = ''
+			}
+		}
+	</script>
+	<!-- Main script -->
+	<script>
+	let parser = new tagscript.Parser({ throwError: true })
+		function log(e, hide = false) {
+			return document.getElementById("console").value += (hide ? '' : '\n>') + e;
+		}
+		function enableFeature(e) {
+			if(features.includes(e)) {
+				features.splice(features.indexOf(e), 1)
+				tagscript.removeDefaults(parser, [e])
+				log(`Disabled Default : ${e}`)
+				document.getElementById('features').innerHTML = `${features.length} features enabled`;
+				document.getElementById(e).checked = false;
+				createShareLink()
+			} else {
+				features.push(e)
+				document.getElementById(e).checked = true
+				document.getElementById('features').innerHTML = `${features.length} features enabled`;
+
+				tagscript.addDefaults(parser, features)
+				log(`Enabled Default : ${e}`)
+				createShareLink()
+			}
+		}
+		function onSubmit() {
+			load(document.getElementById("run-button"));
+			log("Submitting...");
+			let e = Date.now(), n = document.getElementById("txt").value, t;
+			try {
+				t = parser.getNewCtx()
+			}
+			catch(e) {
+				log("Error: " + e);
+				return unload(document.getElementById("run-button"))
+			}
+			if (!n || "" == n) {
+				unload(document.getElementById("run-button"));
+				return log("No Valid input Provided");
+			}
+			t.parse(n)
+				.then((r) => {
+					createShareLink()
+					if ((log(`Parsing complete [Time taken: ${Date.now() - e}ms]`), "" == r || !r)) return (document.getElementById("result").value = "<empty result>");
+					document.getElementById("result").value = r
+					document.getElementById("context").value = inspect.default(t.ctx)
+					document.getElementById("sp").value = JSON.stringify(tagscript.getStaticProps(n), null, 4);
+					unload(document.getElementById("run-button"));
+				})
+				.catch((e) => {
+					unload(document.getElementById("run-button"));
+					log(`Error occurred: ${e}`);
+				});
+		}
+		window.onload = function () {
+				clearel(document.getElementById('console')),
+				clearel(document.getElementById('result')),
+				clearel(document.getElementById('context'))
+				clearel(document.getElementById('sp'))
+		//		(document.getElementById("context").value = ""),
+			//	(document.getElementById("sp").value = ""),
+				//(document.getElementById("version").checked = !1),
+				//(document.getElementById("math").checked = !1),
+				//(document.getElementById("choose").checked = !1),
+				tagscript.removeDefaults(parser, features),
+				(features = []);
+				appendDefaults()
+				// a box using plain text, prints to console
+				// top text - Copyright (c) 2022, typicalninja
+				// below top text - Running TagScript v${tagscript.version}
+				let welcome = `\nRunning TagScript v${tagscript.version}\nCopyright (c) 2022, typicalninja`
+				log(welcome + '\n', true);
+				const { data } = parseQueryParams()
+				if(!data || data == '') {
+					clearel(document.getElementById('txt'))
+				}
+		};
+
+		const defaults_vars = [
+			"version",
+		]
+		const defaults_func = [
+			"math",
+			"choose"
+		]
+
+		function appendDefaults() {
+			const funcs_parent = document.getElementById('def-func');
+			const vars_parent = document.getElementById('def-var');
+
+			defaults_vars.forEach((var_) => {
+				const div = document.createElement('div');
+				div.classList.add('checkbox');
+				const input = document.createElement('input');
+				input.type = 'checkbox';
+				input.id = var_;
+				input.checked = features.includes(var_)
+				input.onclick = () => enableFeature(var_)
+				const label = document.createElement('label');
+				label.for = var_;
+				label.innerHTML = var_;
+				const br = document.createElement('br');
+
+				div.appendChild(input);
+				div.appendChild(label);
+
+				vars_parent.appendChild(div);
+				vars_parent.appendChild(br)
+			});
+
+			defaults_func.forEach((func) => {
+				const div = document.createElement('div');
+				div.classList.add('checkbox');
+				const input = document.createElement('input');
+				input.type = 'checkbox';
+				input.id = func;
+				input.checked = features.includes(func)
+				input.onclick = () => enableFeature(func)
+				const label = document.createElement('label');
+				label.for = func;
+				label.innerHTML = func;
+				const br = document.createElement('br');
+
+				div.appendChild(input);
+				div.appendChild(label);
+
+				funcs_parent.appendChild(div);
+				funcs_parent.appendChild(br)
+			});
+
+		}
+	</script>
+	<!-- Handles data/run querys-->
+	<script>   
+		function parseQueryParams() {
+			const query = new URLSearchParams(location.search)
+			const data = query.get('data')
+			const f = query.get('features')
+			if(data && data !== ''){
+				console.log(data)
+				const b64data = atob(data)
+				document.getElementById("txt").value = b64data
+				createShareLink()
+			}
+			if(f && f !== ''){
+				f.split(',').forEach(feature => {
+					console.log(feature)
+					enableFeature(feature);
+				});
+				createShareLink();
+			}
+
+			return { data, f , query }
+		}
 	</script>
 </html>
