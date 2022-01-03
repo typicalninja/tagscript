@@ -28,7 +28,7 @@ export const getData = (exp: string, type: string,  parser: Parser | null) => {
 		case exp_types.function_withParams:
 			Object.defineProperties(data, {
 				name: { value: exp.split('(')[0], enumerable: true },
-				params: { value: cleanString(exp.substring(exp.indexOf('(') + 1, exp.lastIndexOf(')'))).split(/,\s*/).map((s: string) => getData(s, getTypes(s, parser), parser)), enumerable: true },
+				params: { value: cleanString(exp.substring(exp.indexOf('(') + 1, exp.lastIndexOf(')'))).split(/[^\\],\s*/g).map((s: string) => getData(s, getTypes(s, parser), parser)), enumerable: true },
 				type: { value: type, writable: false, enumerable: true },
 			})
 		break;
