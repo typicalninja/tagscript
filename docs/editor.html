@@ -19,19 +19,25 @@
 		<style>
 		</style>
 		<title>Tagscript online Editor</title>
-		
+		<script src="https://codemirror.net/lib/codemirror.js"></script>
+		<script src="https://codemirror.net/keymap/sublime.js"></script>
+		<script src="https://codemirror.net/mode/javascript/javascript.js"></script>
+
 		<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
+		<link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
+		<link rel="stylesheet" href="https://codemirror.net/theme/monokai.css">
 	</head>
-	<body style="background-color: black; color: white;">    
+	<body style="background-color: black; color: white; margin: 0;">    
 		<!-- Using bulma --> 
 
 			<div class="columns">
 				<div class="column">   
 					<h1 class="title" style="color: white;">Input</h1>
 					<div class="control">
-						<textarea id="txt" spellcheck=”false” class="textarea is-primary" rows="15" style="resize: none;"></textarea>
+						<article id="test"></article>
+						<!-- <textarea id="txt" spellcheck=”false” class="textarea is-primary" rows="15" style="resize: none;"></textarea> -->
 						<button class="button is-success is-light is-small is-outlined" onclick="onSubmit()" id="run-button">Run</button>
-						<button class="button is-danger is-light is-small is-outlined" onclick="clearel(document.getElementById('txt'), true, 'Do you want to clear the Editor?')" id="clear-btn">Clear</button>
+						<button class="button is-danger is-light is-small is-outlined" onclick="(cleareditor(true, 'Do you want to clear the Editor?'), createShareLink())" id="clear-btn">Clear</button>
 		 			</div>
 				</div>
 				<div class="column">
@@ -59,6 +65,7 @@
 							<input id="shareurl" class="input is-primary" type="text" placeholder="run the editor to get share link" readonly>
 							<button id="copy-btn" class="button is-warning" onclick="copyShareLink()" title="copy">Copy</button>
 							<button class="button is-link" onclick="var l = createShareLink();window.open(l)" title="view">View</button>
+							<button id="gen-btn" class="button is-success" onclick="(load(document.getElementById('gen-btn')), setTimeout(() => { createShareLink(); unload(document.getElementById('gen-btn'))}, 1000))" title="view">Generate Link</button>
 						</div>
 						</div>
 					  </article>
@@ -140,8 +147,15 @@
 		function unload(element) { element.classList.remove('is-loading');}
 		function createShareLink() {
 			const element = document.getElementById('shareurl');
-			const data = btoa(document.getElementById('txt').value);
-			element.value = `${window.location.href.split("?")[0]}?${features.length > 0 ? 'features=' + features.join(',') + '&' : ''}data=${encodeURIComponent(data)}`;
+			const data = btoa(editor.getValue());
+			const params = new URLSearchParams();
+			if(features.length > 0) {
+				params.set('features', features.join(','))
+			}
+			if(data && data !== '') {
+				params.set('data', encodeURIComponent(data))
+			}
+			element.value = `${window.location.href.split("?")[0]}${(params.get('data') || params.get('features')) ? '?' + params.toString() : ''}`;
 			return element.value;
 		}
 		function copyShareLink() {
@@ -175,6 +189,29 @@
 	</script>
 	<!-- Main script -->
 	<script>
+		var editor = CodeMirror(document.getElementById('test'), {
+    		value: '',
+    		lineNumbers: true,
+    		mode: "javascript",
+    		keyMap: "sublime",
+   			theme: "monokai",
+    		tabSize: 2
+  			});
+
+		editor.setSize(null, 400)
+
+		function cleareditor(warn, message) {
+			if(warn) {
+				if(!confirm(message)) return
+				else {
+					return editor.setValue('')
+				}
+			}
+			else {
+				return editor.setValue('')
+			}
+		}
+
 	let parser = new tagscript.Parser({ throwError: true })
 		function log(e, hide = false) {
 			return document.getElementById("console").value += (hide ? '' : '\n>') + e;
@@ -199,8 +236,8 @@
 		}
 		function onSubmit() {
 			load(document.getElementById("run-button"));
-			log("Submitting...");
-			let e = Date.now(), n = document.getElementById("txt").value, t;
+			log("Parsing...");
+			let e = Date.now(), n = editor.getValue(), t;
 			try {
 				t = parser.getNewCtx()
 			}
@@ -239,14 +276,12 @@
 				tagscript.removeDefaults(parser, features),
 				(features = []);
 				appendDefaults()
-				// a box using plain text, prints to console
-				// top text - Copyright (c) 2022, typicalninja
-				// below top text - Running TagScript v${tagscript.version}
 				let welcome = `\nRunning TagScript v${tagscript.version}\nCopyright (c) 2022, typicalninja`
 				log(welcome + '\n', true);
 				const { data } = parseQueryParams()
 				if(!data || data == '') {
-					clearel(document.getElementById('txt'))
+					cleareditor()
+					// clearel(document.getElementById('txt'))
 				}
 		};
 
@@ -311,9 +346,9 @@
 			const data = query.get('data')
 			const f = query.get('features')
 			if(data && data !== ''){
-				console.log(data)
-				const b64data = atob(data)
-				document.getElementById("txt").value = b64data
+				const b64data = atob(decodeURIComponent(data))
+				//document.getElementById("txt").value = b64data
+				editor.setValue(b64data)
 				createShareLink()
 			}
 			if(f && f !== ''){
