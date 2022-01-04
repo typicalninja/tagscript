@@ -20,7 +20,6 @@
 		</style>
 		<title>Tagscript online Editor</title>
 		<script src="https://codemirror.net/lib/codemirror.js"></script>
-		<script src="https://codemirror.net/keymap/sublime.js"></script>
 		<script src="https://codemirror.net/mode/javascript/javascript.js"></script>
 
 		<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
@@ -34,8 +33,8 @@
 				<div class="column">   
 					<h1 class="title" style="color: white;">Input</h1>
 					<div class="control">
-						<article id="test"></article>
-						<!-- <textarea id="txt" spellcheck=”false” class="textarea is-primary" rows="15" style="resize: none;"></textarea> -->
+						
+						<textarea id="txt" spellcheck=”false” class="textarea is-primary" rows="15" style="resize: none;"></textarea>
 						<button class="button is-success is-light is-small is-outlined" onclick="onSubmit()" id="run-button">Run</button>
 						<button class="button is-danger is-light is-small is-outlined" onclick="(cleareditor(true, 'Do you want to clear the Editor?'), createShareLink())" id="clear-btn">Clear</button>
 		 			</div>
@@ -189,16 +188,15 @@
 	</script>
 	<!-- Main script -->
 	<script>
-		var editor = CodeMirror(document.getElementById('test'), {
-    		value: '',
+		var editor = CodeMirror.fromTextArea(document.getElementById('txt'), {
+    		value: ``,
     		lineNumbers: true,
     		mode: "javascript",
-    		keyMap: "sublime",
    			theme: "monokai",
     		tabSize: 2
   			});
 
-		editor.setSize(null, 400)
+		editor.setSize(650, 400)
 
 		function cleareditor(warn, message) {
 			if(warn) {
@@ -252,7 +250,8 @@
 			t.parse(n)
 				.then((r) => {
 					createShareLink()
-					if ((log(`Parsing complete [Time taken: ${Date.now() - e}ms]`), "" == r || !r)) return (document.getElementById("result").value = "<empty result>");
+					log(`Parsing complete [Time taken: ${Date.now() - e}ms]`)
+					if("" == r || !r) r = "<empty result>"
 					document.getElementById("result").value = r
 					document.getElementById("context").value = inspect.default(t.ctx)
 					document.getElementById("sp").value = JSON.stringify(tagscript.getStaticProps(n), null, 4);
