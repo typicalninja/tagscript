@@ -1,14 +1,15 @@
 {
   "name": "@typicalninja21/tagscript",
   "version": "2.0.0",
-  "description": "easy to use Templating system, mainly user customizable systems",
-  "main": "",
+  "description": "easy to use Templating system, mainly For user customizable systems",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "typicalninja21",
   "license": "MIT",
+  "repository": "typicalninja493/tagscript",
   "dependencies": {
     "common-tags": "^1.8.2",
     "expr-eval": "^2.0.2",

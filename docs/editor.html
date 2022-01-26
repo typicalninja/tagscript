@@ -1,364 +1,251 @@
-<html>   
-	<head>   
-		<!--<style>       
-			div {
-				display:inline-block;
-				position:relative;
-			}
+<!DOCTYPE html>
+<html>
 
-			button {
-				position:absolute;
-				bottom:10px;
-				right:10px;
-			}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>user guide</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
 
-			textarea {
-				display:block;
-			}
-		</style>-->
-		<style>
-		</style>
-		<title>Tagscript online Editor</title>
-		<script src="https://codemirror.net/lib/codemirror.js"></script>
-		<script src="https://codemirror.net/mode/javascript/javascript.js"></script>
+<body class="stackedit">
+  <div class="stackedit__html"><p><a href="/tagscript"><strong>&lt; Back</strong></a></p>
+<h1 id="user-guide">User guide</h1>
+<blockquote>
+<p>A Guide to users who want to write scripts (refer your users if you want to here)</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> All of the below code is inside {} unless specified</p>
+</blockquote>
+<h2 id="table-of-contents">Table of contents</h2>
+<ol>
+<li><a href="#functions"><strong>Functions</strong></a> :
+<ol>
+<li><a href="#functions-without-params"><em>Functions without params</em></a></li>
+<li><a href="#functions-with-params"><em>Functions with params</em></a></li>
+</ol>
+</li>
+<li><a href="#variables"><strong>Variables</strong></a>
+<ol>
+<li><a href="#defining-a-variable"><em>Defining a variable</em></a></li>
+<li><a href="#syntax"><em>"  .  " Syntax</em></a></li>
+</ol>
+</li>
+<li><a href="#strings"><strong>Strings</strong></a>
+<ol>
+<li><a href="variables-in-strings"><em>Variables in strings</em></a></li>
+</ol>
+</li>
+<li><a href="#conditions-if-else-if-else"><strong>Conditions</strong></a>
+<ol>
+<li><a href="#supported-conditions"><em>Supported Conditions</em></a></li>
+</ol>
+</li>
+</ol>
+<h3 id="functions">Functions</h3>
+<blockquote>
+<p>You can call functions as demonstrated below</p>
+</blockquote>
+<ul>
+<li>
+<p>The Important part to call the Function is “()”</p>
+</li>
+<li>
+<p>make sure there no spaces between “function name” and “()”</p>
+</li>
+<li>
+<p>if throwError is enabled and there is no function name that, a error will be thrown</p>
+</li>
+<li>
+<p>by default there are no functions defined</p>
+</li>
+<li>
+<p>And you (as the user writing script) cant define functions</p>
+</li>
+</ul>
+<h4 id="functions-without-params">Functions without params</h4>
+<blockquote>
+<p>functions without params are called normally like below</p>
+</blockquote>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>
+<p>A Function without anything in between “()” is a Function without params</p>
+</li>
+<li>
+<p>Passing no params to a function that expects param’s might throw a Error (depends on the function)</p>
+</li>
+</ul>
+<h4 id="functions-with-params">Functions with params</h4>
+<blockquote>
+<p>Functions with params are bit different but not complex</p>
+</blockquote>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>param<span class="token operator">&gt;</span><span class="token punctuation">;</span> <span class="token operator">&lt;</span>param<span class="token operator">&gt;</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>
+<p>Define functions params inside “()”</p>
+</li>
+<li>
+<p>separate each param by a “;”</p>
+</li>
+<li>
+<p>strings should be between acceptable string start and ends characters (", ')</p>
+</li>
+<li>
+<p>functions in param’s is <strong>Supported</strong> but is not guaranteed to be stable and fast</p>
+</li>
+</ul>
+<h3 id="variables">Variables</h3>
+<blockquote>
+<p>see the below sub topics on different ways of using them</p>
+</blockquote>
+<ul>
+<li>
+<p>if throwError is enabled and variable is not in the specified context, error will be thrown</p>
+</li>
+<li>
+<p>“.” syntax is supported (ex: variable1.variable2 &lt; Variable 2 must be a Sub Property of variable1)</p>
+</li>
+</ul>
+<h4 id="defining-a-variable">Defining a variable</h4>
+<blockquote>
+<p>Format to defining a variable is <code>variable = value</code></p>
+</blockquote>
+<pre class=" language-js"><code class="prism  language-js">variable <span class="token operator">=</span> <span class="token string">"string value"</span>
 
-		<link rel="stylesheet" href="https://unpkg.com/bulmaswatch/darkly/bulmaswatch.min.css">
-		<link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
-		<link rel="stylesheet" href="https://codemirror.net/theme/monokai.css">
-	</head>
-	<body style="background-color: black; color: white; margin: 0;">    
-		<!-- Using bulma --> 
+# or
 
-			<div class="columns">
-				<div class="column">   
-					<h1 class="title" style="color: white;">Input</h1>
-					<div class="control">
-						
-						<textarea id="txt" spellcheck=”false” class="textarea is-primary" rows="15" style="resize: none;"></textarea>
-						<button class="button is-success is-light is-small is-outlined" onclick="onSubmit()" id="run-button">Run</button>
-						<button class="button is-danger is-light is-small is-outlined" onclick="(cleareditor(true, 'Do you want to clear the Editor?'), createShareLink())" id="clear-btn">Clear</button>
-		 			</div>
-				</div>
-				<div class="column">
-					<h1 class="title">&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-					<article class="message is-info">
-						<div class="message-header">
-						  <p>Tagscript Editor</p>
-						</div>
-						<div class="message-body">
-						 Welcome to the tagscript editor : )
-						 <br>
-						 Input your code in the input area and click <strong>run</strong>
-						 <br>
-						 Results will be visible in the output area
-						 <br>
-						 This Online Editor uses tagscript <a href="/tagscript/index.html#using-from-the-web">Web bundle</a>
-						 <br>
-						 <p>Data query param is encoded b64</p>
-						 <br>
-						 <p>Made with ♥️ by <a href="https://github.com/typicalninja493"><strong>Typicalinja</strong></a></p>
-						 <div>
-							<br>
-							<strong>Share Url</strong>
-							<p>Use this to share this script between people</p>
-							<input id="shareurl" class="input is-primary" type="text" placeholder="run the editor to get share link" readonly>
-							<button id="copy-btn" class="button is-warning" onclick="copyShareLink()" title="copy">Copy</button>
-							<button class="button is-link" onclick="var l = createShareLink();window.open(l)" title="view">View</button>
-							<button id="gen-btn" class="button is-success" onclick="(load(document.getElementById('gen-btn')), setTimeout(() => { createShareLink(); unload(document.getElementById('gen-btn'))}, 1000))" title="view">Generate Link</button>
-						</div>
-						</div>
-					  </article>
-				</div>
-			</div>
+variable <span class="token operator">=</span> <span class="token function">functionValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-			
-			<div class="columns">
-				<div class="column">       
-						<!--<h1 class="title" style="color: white;">Console</h1>
-						<textarea id="console" class="textarea is-medium" rows="7" readonly></textarea>	 -->
-						<h1 class="title">&nbsp;&nbsp;&nbsp;&nbsp;</h1>
-						<article class="message ">
-							<div class="message-header">
-							  <p>Console</p>
-							</div>
-							<div class="message-body">
-								<textarea id="console" class="textarea is-normal" rows="6" style="resize: none;" readonly></textarea>
-								<button class="button is-danger is-light is-small is-outlined" onclick="clearel(document.getElementById('console'), true, 'Do you want to clear the console?')">Clear</button>
-							</div>
-						</article>
-				</div>
-				<div class="column">       
-						<h1 class="title" style="color: white;">Output</h1>
-						<textarea id="result" class="textarea is-medium" rows="9" spellcheck=”false” style="resize: none;" readonly></textarea>	 
-						<button class="button is-danger is-light is-small is-outlined" onclick="clearel(document.getElementById('result'), true, 'Do you want to clear the output?')">Clear</button>
-				</div>
-			</div>
+# or
 
-			<div class="columns">
-				<div class="column">       
-					<h1 class="title" style="color: white;">Context</h1>
-					<p>Global context this script produces</p>
-					<div>   
-						<textarea id="context" spellcheck=”false” class="textarea is-small" rows="12" style="resize: none;" readonly></textarea>	 
-					</div>
-				</div>
-				<div class="column">    
-					<h1 class="title" style="color: white;">Static Props</h1>
-					<p>Static Props generated for this script</p>
-					<div>   
-						<textarea id="sp" spellcheck=”false” class="textarea is-small" rows="12" style="resize: none;" readonly ></textarea>	 
-					</div>
-				</div>
-			</div>
+variable2 <span class="token operator">=</span> variable
+</code></pre>
+<p><a href="/tagscript/editor.html?data=e3ZhcmlhYmxlID0gInN0cmluZyB2YWx1ZSJ9DQoNCnZhcmlhYmxlID4%2BIHt2YXJpYWJsZX0%3D"><strong>View Example</strong></a></p>
+<ul>
+<li>
+<p>Value can be a <code>string / function / another variable</code></p>
+</li>
+<li>
+<p>when defining you may override a previously defined variable</p>
+</li>
+<li>
+<p>make sure to define a variable before using it</p>
+</li>
+<li>
+<p>If variable is undefined and throwError is enabled it will throw a Error</p>
+</li>
+</ul>
+<h4 id="syntax">“.” syntax</h4>
+<blockquote>
+<p>“.” syntax is simple, see the below example</p>
+</blockquote>
+<pre><code>
+variable1.variable2
 
+</code></pre>
+<ul>
+<li>
+<p>Here, variable 1 has a sub property called variable2.</p>
+</li>
+<li>
+<p>You can keep chaining these (only if the sub Properties exists)</p>
+</li>
+<li>
+<p>if throwError is enabled and <code>variable1</code> is undefined a Error will be thrown</p>
+</li>
+</ul>
+<h3 id="strings">Strings</h3>
+<blockquote>
+<p>Version 2 Introduce new types to tagscript this includes string<br>
+<strong>NOTE:</strong> In <strong>older</strong> (v <code>1</code>) versions expressions that were not a variable was taken as a string and did <strong>not</strong> have a special way of defining them. in new versions (v2 and ^) you <strong>must</strong> keep strings between start and end characters of strings<br>
+Start and end Characters are : <code>"</code> | <code>'</code>, either one of this must be used to end and start of a string</p>
+</blockquote>
+<p><code>EX</code>:</p>
+<ol>
+<li>"this is a string:</li>
+<li>‘this is a string’</li>
+<li>this is not a string</li>
+</ol>
+<h4 id="variables-in-strings">Variables in strings</h4>
+<p><a href="/tagscript/editor.html?data=e2dvb2QgPSAiZGF5In0NCg0KeyJpdHMgYSBnb29kICQoZ29vZCkifQ=="><strong>View Example</strong></a></p>
+<blockquote>
+<p>(<strong>YAY</strong>) You can now use (v <code>2</code> and ^) variables in strings</p>
+</blockquote>
+<p><code>EX</code>: “is this a string, $(isit)”</p>
+<blockquote>
+<p>here <code>istit</code> will be a variable (<code>ex</code>: <code>{isit = "yes it is"}</code> )<br>
+<strong>NOTE</strong>: calling functions inside string is still in testing, mean while call function outside of the string and apply the result to a variable<br>
+<code>EX</code>:</p>
+</blockquote>
+<pre class=" language-js"><code class="prism  language-js"><span class="token punctuation">{</span>result <span class="token operator">=</span> <span class="token function">getSomeCatPictures</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+here are some urls to cat pictures
+<span class="token punctuation">{</span><span class="token string">"there are super cute : ) $(result)"</span><span class="token punctuation">}</span>
+</code></pre>
+<h3 id="conditions-if-else-if-else">Conditions (if, else if, else)</h3>
+<p>Conditions are of <code>3</code> parts, those are (displayed in how they need to be written in),</p>
+<ol>
+<li><code>if</code> - Every condition chain <strong>MUST</strong> Start with a <strong>IF</strong>. it <strong>MUST</strong> be at the start of the condition chain</li>
+<li><code>elseIF</code> - elseIF’s are <strong>optional</strong>, and is ran if above <code>if</code> returns <code>false</code> for a condition</li>
+<li><code>else</code> - else is also optional, how ever else’s <strong>MUST</strong> only be at a end if condition chain</li>
+</ol>
+<blockquote>
+<p>For a condition to be triggered the condition must return <code>true</code> if the condition results in a <code>false</code> it either skips to <code>elseIF</code> or <code>else</code> (if present) or skips the condition block all together</p>
+</blockquote>
+<h4 id="supported-conditions">Supported Conditions</h4>
+<ol>
+<li>
+<p><code>==</code> - [<strong>Equal</strong>] :- used to check if 2 values are equal to each other, similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality">JavaScript equality</a>. returns <code>Boolean (true/false)</code><br>
+Example:</p>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">)</span> <span class="token comment">// true</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>y <span class="token operator">==</span> d<span class="token punctuation">)</span> <span class="token comment">// false (y = "hey", d = "another")</span>
+</code></pre>
+</li>
+<li>
+<p><code>===</code> - [<strong>Strict Equal</strong>] :- similar to above <strong>Equal</strong> , however it also checks for the type of the 2 values, similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality">javascript strict equality</a>. returns <code>Boolean (true/false)</code><br>
+Example:</p>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">===</span> <span class="token string">"1"</span><span class="token punctuation">)</span> <span class="token comment">// false (different types, number | string)</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">===</span> <span class="token string">"1"</span><span class="token punctuation">)</span> <span class="token comment">// true</span>
+</code></pre>
+</li>
+<li>
+<p><code>&gt;</code> - [<strong>Greater than</strong>]  :- works only on numbers (ex: <code>l = 1</code>). returns <code>true</code> if the left operand is greater than the right operand. similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Greater_than">JavaScript greater than</a></p>
+</li>
+<li>
+<p><code>&gt;=</code> [<strong>Greater than or Equal</strong>] :- works only on numbers (ex: <code>l = 1</code>). returns <code>true</code> if the left operand is greater than or equal to the right operand, similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Greater_than_or_equal">JavaScript greater than or equal</a></p>
+</li>
+<li>
+<p><code>&lt;</code> - [<strong>Less than</strong>] :- works only on numbers (ex: <code>l = 1</code>). returns <code>true</code> if the left operand is less than the right operand. similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Less_than">JavaScript less than</a></p>
+</li>
+<li>
+<p><code>&lt;=</code> - [<strong>Less than or Equal</strong>] :-  works only on numbers (ex: <code>l = 1</code>). returns <code>true</code> if the left operand is less than or equal to the right operand</p>
+</li>
+</ol>
+<h4 id="code-inside-conditions">code inside conditions</h4>
+<p>the code inside the condition is your general tagscript you use outside of it. however every new code block must be seperated by a <code>;</code> (the parser splits code inside by <code>;</code> and joins the splited parts with <code>{code}</code> so it can create a <strong>new</strong> Interpreter to run it)</p>
+<p>Example:<br>
+<a href="/tagscript/editor.html?data=e251bWJlciA9IDF9DQp7bnVtYmVyMiA9IDJ9DQp7c3RyaW5nID0gIjEifQ0Ke3Jlc3VsdCA9ICJubyBkYXRhIn0NCntpZihudW1iZXIyID4gbnVtYmVyKToNCglyZXN1bHQgPSAibnVtYmVyMiBpcyBncmVhdGVyIHRoYW4gbnVtYmVyIDEiDQo6ZWxzZUlGKHN0cmluZyA9PT0gIjEiKToNCglyZXN1bHQgPSAic3RyaW5nIGVxdWFscyB0byAxIg0KOmVsc2VJRihudW1iZXIyID49IDIpOg0KCXJlc3VsdCA9ICJudW1iZXIyIGlzIGdyZWF0ZXIgdGhhbiAyIg0KCW51bWJlcjIgPSAzDQo6ZWxzZToNCglyZXN1bHQgPSAiZXZlcnl0aGluZyBpcyBub3JtYWwiDQo6fQ0KDQpyZXN1bHQgPj4ge3Jlc3VsdH0NCm51bWJlciA%2BPiB7bnVtYmVyfQ0KbnVtYmVyMiA%2BPiB7bnVtYmVyMn0%3D"><strong>View example</strong></a></p>
+<pre class=" language-js"><code class="prism  language-js"><span class="token punctuation">{</span>number <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>number2 <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>string <span class="token operator">=</span> <span class="token string">"1"</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>result <span class="token operator">=</span> <span class="token string">"no data"</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span><span class="token keyword">if</span><span class="token punctuation">(</span>number2 <span class="token operator">&gt;</span> number<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	result <span class="token operator">=</span> <span class="token string">"number2 is greater than number 1"</span><span class="token punctuation">;</span>
+<span class="token punctuation">:</span><span class="token function">elseIF</span><span class="token punctuation">(</span>string <span class="token operator">===</span> <span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	result <span class="token operator">=</span> <span class="token string">"string equals to 1"</span><span class="token punctuation">;</span>
+<span class="token punctuation">:</span><span class="token function">elseIF</span><span class="token punctuation">(</span>number2 <span class="token operator">&gt;=</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	result <span class="token operator">=</span> <span class="token string">"number2 is greater than 2"</span><span class="token punctuation">;</span>
+<span class="token punctuation">:</span><span class="token keyword">else</span><span class="token punctuation">:</span>
+	result <span class="token operator">=</span> <span class="token string">"everything is normal"</span>
+<span class="token punctuation">:</span><span class="token punctuation">}</span>
 
-			<div>
-				<article class="message">
-					<div class="message-header">
-					  <p>Controls</p>
-					  <p id="features">0 features enabled</p>
-					</div>
-					<div class="message-body">
-						<h1 class="subtitle">Enable Defaults</h1>
-						<br>
-						<div class="columns">
-								<div class="column">
-										<h1>Variables</h1>
-										<div id="def-var"></div>
-								</div>
-								<div class="column">
-									<h1>Functions</h1>
-									<div id="def-func"></div>
-							</div>
-						</div>
-					</div>
-				  </article>
-			</div>
-			<br>
-	</body>
-	<!-- Import out web bundle for tagscript -->
-	<script src="assets/bundle.js"></script>
-	<!-- Webpack bundle for node.js util inspect -->
-	<script src="assets/inspect.js"></script>
-	<script>
-		let features = [];
-		function load(element) { element.classList.add('is-loading'); }
-		function unload(element) { element.classList.remove('is-loading');}
-		function createShareLink() {
-			const element = document.getElementById('shareurl');
-			const data = btoa(editor.getValue());
-			const params = new URLSearchParams();
-			if(features.length > 0) {
-				params.set('features', features.join(','))
-			}
-			if(data && data !== '') {
-				params.set('data', encodeURIComponent(data))
-			}
-			element.value = `${window.location.href.split("?")[0]}${(params.get('data') || params.get('features')) ? '?' + params.toString() : ''}`;
-			return element.value;
-		}
-		function copyShareLink() {
-			const element = document.getElementById('shareurl');
-			load(document.getElementById('copy-btn'));
-			setTimeout(() => {
-				element.select();
-				element.setSelectionRange(0, 99999);
-				navigator.clipboard.writeText(element.value).then(() => {
-					unload(document.getElementById('copy-btn'));
-					element.blur();
-				}).catch(() => {
-					alert('Failed to copy to clipboard');
-				});
-			}, 1000)
-		}
-		function clearel(elemnt, prompt = false, message) {
-			if(prompt) {
-				if(!confirm(message)) {
-					return;
-				} else {
-					elemnt.value = '';
-					elemnt.innerHTML = ''
-				}
-			}
-			else {
-				elemnt.value = '';
-				elemnt.innerHTML = ''
-			}
-		}
-	</script>
-	<!-- Main script -->
-	<script>
-		var editor = CodeMirror.fromTextArea(document.getElementById('txt'), {
-    		value: ``,
-    		lineNumbers: true,
-    		mode: "javascript",
-   			theme: "monokai",
-    		tabSize: 2
-  			});
+result <span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>result<span class="token punctuation">}</span>
+number <span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>number<span class="token punctuation">}</span>
+number2 <span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>number2<span class="token punctuation">}</span>
+</code></pre>
+</div>
+</body>
 
-		editor.setSize(650, 400)
-
-		function cleareditor(warn, message) {
-			if(warn) {
-				if(!confirm(message)) return
-				else {
-					return editor.setValue('')
-				}
-			}
-			else {
-				return editor.setValue('')
-			}
-		}
-
-	let parser = new tagscript.Parser({ throwError: true })
-		function log(e, hide = false) {
-			return document.getElementById("console").value += (hide ? '' : '\n>') + e;
-		}
-		function enableFeature(e) {
-			if(features.includes(e)) {
-				features.splice(features.indexOf(e), 1)
-				tagscript.removeDefaults(parser, [e])
-				log(`Disabled Default : ${e}`)
-				document.getElementById('features').innerHTML = `${features.length} features enabled`;
-				document.getElementById(e).checked = false;
-				createShareLink()
-			} else {
-				features.push(e)
-				document.getElementById(e).checked = true
-				document.getElementById('features').innerHTML = `${features.length} features enabled`;
-
-				tagscript.addDefaults(parser, features)
-				log(`Enabled Default : ${e}`)
-				createShareLink()
-			}
-		}
-		function onSubmit() {
-			load(document.getElementById("run-button"));
-			log("Parsing...");
-			let e = Date.now(), n = editor.getValue(), t;
-			try {
-				t = parser.getNewCtx()
-			}
-			catch(e) {
-				log("Error: " + e);
-				return unload(document.getElementById("run-button"))
-			}
-			if (!n || "" == n) {
-				unload(document.getElementById("run-button"));
-				return log("No Valid input Provided");
-			}
-			t.parse(n)
-				.then((r) => {
-					createShareLink()
-					log(`Parsing complete [Time taken: ${Date.now() - e}ms]`)
-					if("" == r || !r) r = "<empty result>"
-					document.getElementById("result").value = r
-					document.getElementById("context").value = inspect.default(t.ctx)
-					document.getElementById("sp").value = JSON.stringify(tagscript.getStaticProps(n), null, 4);
-					unload(document.getElementById("run-button"));
-				})
-				.catch((e) => {
-					unload(document.getElementById("run-button"));
-					log(`Error occurred: ${e}`);
-				});
-		}
-		window.onload = function () {
-				clearel(document.getElementById('console')),
-				clearel(document.getElementById('result')),
-				clearel(document.getElementById('context'))
-				clearel(document.getElementById('sp'))
-		//		(document.getElementById("context").value = ""),
-			//	(document.getElementById("sp").value = ""),
-				//(document.getElementById("version").checked = !1),
-				//(document.getElementById("math").checked = !1),
-				//(document.getElementById("choose").checked = !1),
-				tagscript.removeDefaults(parser, features),
-				(features = []);
-				appendDefaults()
-				let welcome = `\nRunning TagScript v${tagscript.version}\nCopyright (c) 2022, typicalninja`
-				log(welcome + '\n', true);
-				const { data } = parseQueryParams()
-				if(!data || data == '') {
-					cleareditor()
-					// clearel(document.getElementById('txt'))
-				}
-		};
-
-		const defaults_vars = [
-			"version",
-		]
-		const defaults_func = [
-			"math",
-			"choose"
-		]
-
-		function appendDefaults() {
-			const funcs_parent = document.getElementById('def-func');
-			const vars_parent = document.getElementById('def-var');
-
-			defaults_vars.forEach((var_) => {
-				const div = document.createElement('div');
-				div.classList.add('checkbox');
-				const input = document.createElement('input');
-				input.type = 'checkbox';
-				input.id = var_;
-				input.checked = features.includes(var_)
-				input.onclick = () => enableFeature(var_)
-				const label = document.createElement('label');
-				label.for = var_;
-				label.innerHTML = var_;
-				const br = document.createElement('br');
-
-				div.appendChild(input);
-				div.appendChild(label);
-
-				vars_parent.appendChild(div);
-				vars_parent.appendChild(br)
-			});
-
-			defaults_func.forEach((func) => {
-				const div = document.createElement('div');
-				div.classList.add('checkbox');
-				const input = document.createElement('input');
-				input.type = 'checkbox';
-				input.id = func;
-				input.checked = features.includes(func)
-				input.onclick = () => enableFeature(func)
-				const label = document.createElement('label');
-				label.for = func;
-				label.innerHTML = func;
-				const br = document.createElement('br');
-
-				div.appendChild(input);
-				div.appendChild(label);
-
-				funcs_parent.appendChild(div);
-				funcs_parent.appendChild(br)
-			});
-
-		}
-	</script>
-	<!-- Handles data/run querys-->
-	<script>   
-		function parseQueryParams() {
-			const query = new URLSearchParams(location.search)
-			const data = query.get('data')
-			const f = query.get('features')
-			if(data && data !== ''){
-				const b64data = atob(decodeURIComponent(data))
-				//document.getElementById("txt").value = b64data
-				editor.setValue(b64data)
-				createShareLink()
-			}
-			if(f && f !== ''){
-				f.split(',').forEach(feature => {
-					console.log(feature)
-					enableFeature(feature);
-				});
-				createShareLink();
-			}
-
-			return { data, f , query }
-		}
-	</script>
 </html>

@@ -3,9 +3,9 @@
  * Now globalCtx is empty without functions by default
  */
 import { Parser } from "."
-import { version } from './package.json'
+import { version } from './index'
 
-let math = (_: any) => '1'
+let math = (_: any) => '0'
 
 try {
 	// import expr-eval parser

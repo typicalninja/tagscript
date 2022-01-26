@@ -39,11 +39,10 @@ const ctx = parser.getNewCtx();
 const script = `
 {var = 'string'}
 {"var is defined as $(var)"}
-{func = choose('today is great', 'today is bad')}
+{func = choose('today is great'; 'today is bad')}
 {"is today great? $(func)"}
-{randomOfRandom = choose(func, 'idk')}
+{randomOfRandom = choose(func; 'idk')}
 {"Random of Random is $(randomOfRandom)"}
-{"Process Version is $(process.version) (we support "." syntax) }
 `
 
 // use the parse function
