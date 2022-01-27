@@ -1,0 +1,108 @@
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@typicalninja21/tagscript</title><meta name="description" content="Documentation for @typicalninja21/tagscript"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@typicalninja21/tagscript</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@typicalninja21/tagscript</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#beta" id="beta" style="color: inherit; text-decoration: none;">
+  <h1>beta</h1>
+</a>
+
+<a href="#tagscript" id="tagscript" style="color: inherit; text-decoration: none;">
+  <h1>tagscript</h1>
+</a>
+<blockquote>
+<p>Easy to use Templating system. Let your user&#39;s write scripts themselves</p>
+</blockquote>
+
+<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+  <h1>Install</h1>
+</a>
+<pre><code class="language-diff"><span class="hl-2">    npm i @typicalninja21/tagscript</span>
+</code></pre>
+
+<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
+  <h1>Docs</h1>
+</a>
+<blockquote>
+<p>Docs are available at <a href="https://typicalninja493.github.io/tagscript/">here</a></p>
+</blockquote>
+
+<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+  <h1>Usage</h1>
+</a>
+<blockquote>
+<p>All of these Examples are in <strong>Typescript</strong> If you want to use <strong>Javascript</strong> you will have to convert the example&#39;s to javascript</p>
+</blockquote>
+<ul>
+<li>Base Code: This is the base code needed for below examples</li>
+</ul>
+<pre><code class="language-ts"><span class="hl-1">import</span><span class="hl-2"> { </span><span class="hl-3">Parser</span><span class="hl-2"> } </span><span class="hl-1">from</span><span class="hl-2"> </span><span class="hl-4">&#39;@typicalninja21/tagscript&#39;</span><br/><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">parser</span><span class="hl-2"> = </span><span class="hl-5">new</span><span class="hl-2"> </span><span class="hl-7">Parser</span><span class="hl-2">();</span><br/><br/><span class="hl-0">// get a new Context</span><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">ctx</span><span class="hl-2"> = </span><span class="hl-3">parser</span><span class="hl-2">.</span><span class="hl-7">getNewCtx</span><span class="hl-2">();</span>
+</code></pre>
+
+<a href="#all-in-one" id="all-in-one" style="color: inherit; text-decoration: none;">
+  <h3>All in one</h3>
+</a>
+<blockquote>
+<p>Below is a full complete script to showcase the features of this package, you can see below for more specific examples</p>
+</blockquote>
+<pre><code class="language-ts"><span class="hl-0">// ctx is defined in above base snippet</span><br/><span class="hl-0">// choose() is a default function, you will have to apply it</span><br/><span class="hl-0">// process and its sub property is a default function, you will have to apply it</span><br/><span class="hl-5">const</span><span class="hl-2"> </span><span class="hl-6">script</span><span class="hl-2"> = </span><span class="hl-4">`</span><br/><span class="hl-4">{var = &#39;string&#39;}</span><br/><span class="hl-4">{&quot;var is defined as $(var)&quot;}</span><br/><span class="hl-4">{func = choose(&#39;today is great&#39;; &#39;today is bad&#39;)}</span><br/><span class="hl-4">{&quot;is today great? $(func)&quot;}</span><br/><span class="hl-4">{randomOfRandom = choose(func; &#39;idk&#39;)}</span><br/><span class="hl-4">{&quot;Random of Random is $(randomOfRandom)&quot;}</span><br/><span class="hl-4">`</span><br/><br/><span class="hl-0">// use the parse function</span><br/><span class="hl-3">ctx</span><span class="hl-2">.</span><span class="hl-7">parse</span><span class="hl-2">(</span><span class="hl-3">script</span><span class="hl-2">).</span><span class="hl-7">then</span><span class="hl-2">(</span><span class="hl-3">console</span><span class="hl-2">.</span><span class="hl-3">log</span><span class="hl-2">).</span><span class="hl-7">catch</span><span class="hl-2">(</span><span class="hl-3">console</span><span class="hl-2">.</span><span class="hl-3">log</span><span class="hl-2">)</span>
+</code></pre>
+
+<a href="#using-from-the-web" id="using-from-the-web" style="color: inherit; text-decoration: none;">
+  <h1>Using from the web</h1>
+</a>
+<p>We offer a web bundle that is bundled with <a href="https://webpack.js.org/">webpack</a> and is available at the following cdns</p>
+<ul>
+<li>If possible download this and host on your own website (recommended)</li>
+<li>If not just directly use one of the following cdns (not recommended):</li>
+</ul>
+<blockquote>
+<p><a href="https://cdn.jsdelivr.net/gh/typicalninja493/tagscript@beta/web/bundle.js">jsdelivr</a> (recommended)</p>
+</blockquote>
+<blockquote>
+<p><a href="https://cdn.statically.io/gh/typicalninja493/tagscript@beta/web/bundle.js">statically</a></p>
+</blockquote>
+
+<a href="#live-demo--tagscript-editor" id="live-demo--tagscript-editor" style="color: inherit; text-decoration: none;">
+  <h1>Live Demo / Tagscript Editor</h1>
+</a>
+<p>You can find a Live Demo / Tagscript Editor <a href="https://typicalninja493.github.io/tagscript/editor.html">here</a></p>
+<blockquote>
+<p>The editor utilizes the web <a href="#using-from-the-web">bundle</a> </p>
+</blockquote>
+
+<a href="#extensions" id="extensions" style="color: inherit; text-decoration: none;">
+  <h1>Extensions</h1>
+</a>
+<blockquote>
+<p>Yess, this library allows you to extend it&#39;s functionality without directly interacting with the source code</p>
+</blockquote>
+<blockquote>
+<p><a href="https://typicalninja493.github.io/tagscript/extension.html">here</a> is A simple Guide on this Subject</p>
+</blockquote>
+<blockquote>
+<p><a href="https://typicalninja493.github.io/tagscript/extension.html">Click for guide</a></p>
+</blockquote>
+
+<a href="#optimizing--providing-pre-gen-static-data" id="optimizing--providing-pre-gen-static-data" style="color: inherit; text-decoration: none;">
+  <h1>Optimizing / Providing Pre gen static Data</h1>
+</a>
+<blockquote>
+<p>You can click <a href="https://typicalninja493.github.io/tagscript/static.html">here</a> for guide on this topic
+or <a href="https://typicalninja493.github.io/tagscript/static.html">Click here for guide</a></p>
+</blockquote>
+
+<a href="#user-guide" id="user-guide" style="color: inherit; text-decoration: none;">
+  <h1>User Guide</h1>
+</a>
+<blockquote>
+<p>A Complete guides for users wanting to write their own scripts can be found <a href="https://typicalninja493.github.io/tagscript/guide.html">here</a></p>
+</blockquote>
+<p><a href="https://typicalninja493.github.io/tagscript/guide.html">Or Click here</a></p>
+
+<a href="#support" id="support" style="color: inherit; text-decoration: none;">
+  <h1>Support</h1>
+</a>
+<blockquote>
+<p>This package was made for my own discord bot&#39;s (<a href="https://axixbot.cf">axix</a> v2) custom commands / tags system</p>
+</blockquote>
+<ul>
+<li>If you need support for this package, please join the <a href="https://discord.com/invite/HVnGtzMaW4">support server</a></li>
+</ul>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li><li class=" tsd-kind-namespace"><a href="modules/utils.html">utils</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class"><a href="classes/Interpreter.html" class="tsd-kind-icon">Interpreter</a></li><li class="tsd-kind-class"><a href="classes/Parser.html" class="tsd-kind-icon">Parser</a></li><li class="tsd-kind-property"><a href="modules.html#getStaticProps" class="tsd-kind-icon">get<wbr/>Static<wbr/>Props</a></li><li class="tsd-kind-variable"><a href="modules.html#version" class="tsd-kind-icon">version</a></li><li class="tsd-kind-function"><a href="modules.html#addDefaults" class="tsd-kind-icon">add<wbr/>Defaults</a></li><li class="tsd-kind-function"><a href="modules.html#createLoadExtensionData" class="tsd-kind-icon">create<wbr/>Load<wbr/>Extension<wbr/>Data</a></li><li class="tsd-kind-function"><a href="modules.html#removeDefaults" class="tsd-kind-icon">remove<wbr/>Defaults</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>user guide</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><p><a href="/tagscript"><strong>&lt; Back</strong></a></p>
+<h1 id="user-guide">User guide</h1>
+<blockquote>
+<p>A Guide to users who want to write scripts (refer your users if you want to here)</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> All of the below code is inside {} unless specified</p>
+</blockquote>
+<h2 id="table-of-contents">Table of contents</h2>
+<ol>
+<li><a href="#functions"><strong>Functions</strong></a> :
+<ol>
+<li><a href="#functions-without-params"><em>Functions without params</em></a></li>
+<li><a href="#functions-with-params"><em>Functions with params</em></a></li>
+</ol>
+</li>
+<li><a href="#variables"><strong>Variables</strong></a>
+<ol>
+<li><a href="#defining-a-variable"><em>Defining a variable</em></a></li>
+<li><a href="#syntax"><em>"  .  " Syntax</em></a></li>
+</ol>
+</li>
+<li><a href="#strings"><strong>Strings</strong></a>
+<ol>
+<li><a href="variables-in-strings"><em>Variables in strings</em></a></li>
+</ol>
+</li>
+<li><a href="#conditions-if-else-if-else"><strong>Conditions</strong></a>
+<ol>
+<li><a href="#supported-conditions"><em>Supported Conditions</em></a></li>
+</ol>
+</li>
+</ol>
+<h3 id="functions">Functions</h3>
+<blockquote>
+<p>You can call functions as demonstrated below</p>
+</blockquote>
+<ul>
+<li>
+<p>The Important part to call the Function is “()”</p>
+</li>
+<li>
+<p>make sure there no spaces between “function name” and “()”</p>
+</li>
+<li>
+<p>if throwError is enabled and there is no function name that, a error will be thrown</p>
+</li>
+<li>
+<p>by default there are no functions defined</p>
+</li>
+<li>
+<p>And you (as the user writing script) cant define functions</p>
+</li>
+</ul>
+<h4 id="functions-without-params">Functions without params</h4>
+<blockquote>
+<p>functions without params are called normally like below</p>
+</blockquote>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>
+<p>A Function without anything in between “()” is a Function without params</p>
+</li>
+<li>
+<p>Passing no params to a function that expects param’s might throw a Error (depends on the function)</p>
+</li>
+</ul>
+<h4 id="functions-with-params">Functions with params</h4>
+<blockquote>
+<p>Functions with params are bit different but not complex</p>
+</blockquote>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token operator">&lt;</span>param<span class="token operator">&gt;</span><span class="token punctuation">,</span> <span class="token operator">&lt;</span>param<span class="token operator">&gt;</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>
+<p>Define functions params inside “()”</p>
+</li>
+<li>
+<p>separate each param by a “,”</p>
+</li>
+<li>
+<p>strings should be between acceptable string start and ends characters (", ')</p>
+</li>
+<li>
+<p>functions in param’s is <strong>Supported</strong> but is not guaranteed to be stable and fast</p>
+</li>
+</ul>
+<h3 id="variables">Variables</h3>
+<blockquote>
+<p>see the below sub topics on different ways of using them</p>
+</blockquote>
+<ul>
+<li>
+<p>if throwError is enabled and variable is not in the specified context, error will be thrown</p>
+</li>
+<li>
+<p>“.” syntax is supported (ex: variable1.variable2 &lt; Variable 2 must be a Sub Property of variable1)</p>
+</li>
+</ul>
+<h4 id="defining-a-variable">Defining a variable</h4>
+<blockquote>
+<p>Format to defining a variable is <code>variable = value</code></p>
+</blockquote>
+<pre class=" language-js"><code class="prism  language-js">variable <span class="token operator">=</span> <span class="token string">"string value"</span>
+
+# or
+
+variable <span class="token operator">=</span> <span class="token function">functionValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+# or
+
+variable2 <span class="token operator">=</span> variable
+</code></pre>
+<p><a href="/tagscript/editor.html?data=e3ZhcmlhYmxlID0gInN0cmluZyB2YWx1ZSJ9DQoNCnZhcmlhYmxlID4%2BIHt2YXJpYWJsZX0%3D"><strong>View Example</strong></a></p>
+<ul>
+<li>
+<p>Value can be a <code>string / function / another variable</code></p>
+</li>
+<li>
+<p>when defining you may override a previously defined variable</p>
+</li>
+<li>
+<p>make sure to define a variable before using it</p>
+</li>
+<li>
+<p>If variable is undefined and throwError is enabled it will throw a Error</p>
+</li>
+</ul>
+<h4 id="syntax">“.” syntax</h4>
+<blockquote>
+<p>“.” syntax is simple, see the below example</p>
+</blockquote>
+<pre><code>
+variable1.variable2
+
+</code></pre>
+<ul>
+<li>
+<p>Here, variable 1 has a sub property called variable2.</p>
+</li>
+<li>
+<p>You can keep chaining these (only if the sub Properties exists)</p>
+</li>
+<li>
+<p>if throwError is enabled and <code>variable1</code> is undefined a Error will be thrown</p>
+</li>
+</ul>
+<h3 id="strings">Strings</h3>
+<blockquote>
+<p>Version 2 Introduce new types to tagscript this includes string<br>
+<strong>NOTE:</strong> In <strong>older</strong> (v <code>1</code>) versions expressions that were not a variable was taken as a string and did <strong>not</strong> have a special way of defining them. in new versions (v2 and ^) you <strong>must</strong> keep strings between start and end characters of strings<br>
+Start and end Characters are : <code>"</code> | <code>'</code>, either one of this must be used to end and start of a string</p>
+</blockquote>
+<p><code>EX</code>:</p>
+<ol>
+<li>"this is a string:</li>
+<li>‘this is a string’</li>
+<li>this is not a string</li>
+</ol>
+<h4 id="variables-in-strings">Variables in strings</h4>
+<p><a href="/tagscript/editor.html?data=e2dvb2QgPSAiZGF5In0NCg0KeyJpdHMgYSBnb29kICQoZ29vZCkifQ=="><strong>View Example</strong></a></p>
+<blockquote>
+<p>(<strong>YAY</strong>) You can now use (v <code>2</code> and ^) variables in strings</p>
+</blockquote>
+<p><code>EX</code>: “is this a string, $(isit)”</p>
+<blockquote>
+<p>here <code>istit</code> will be a variable (<code>ex</code>: <code>{isit = "yes it is"}</code> )<br>
+<strong>NOTE</strong>: calling functions inside string is still in testing, mean while call function outside of the string and apply the result to a variable<br>
+<code>EX</code>:</p>
+</blockquote>
+<pre class=" language-js"><code class="prism  language-js"><span class="token punctuation">{</span>result <span class="token operator">=</span> <span class="token function">getSomeCatPictures</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+here are some urls to cat pictures
+<span class="token punctuation">{</span><span class="token string">"there are super cute : ) $(result)"</span><span class="token punctuation">}</span>
+</code></pre>
+<h3 id="conditions-if-else-if-else">Conditions (if, else if, else)</h3>
+<p>Conditions are of <code>3</code> parts, those are (displayed in how they need to be written in),</p>
+<ol>
+<li><code>if</code> - Every condition chain <strong>MUST</strong> Start with a <strong>IF</strong>. it <strong>MUST</strong> be at the start of the condition chain</li>
+<li><code>elseIF</code> - elseIF’s are <strong>optional</strong>, and is ran if above <code>if</code> returns <code>false</code> for a condition</li>
+<li><code>else</code> - else is also optional, how ever else’s <strong>MUST</strong> only be at a end if condition chain</li>
+</ol>
+<blockquote>
+<p>For a condition to be triggered the condition must return <code>true</code> if the condition results in a <code>false</code> it either skips to <code>elseIF</code> or <code>else</code> (if present) or skips the condition block all together</p>
+</blockquote>
+<h4 id="supported-conditions">Supported Conditions</h4>
+<ol>
+<li>
+<p><code>==</code> - [<strong>Equal</strong>] :- used to check if 2 values are equal to each other, similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Equality">JavaScript equality</a>. returns <code>Boolean (true/false)</code><br>
+Example:</p>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">==</span> <span class="token string">"1"</span><span class="token punctuation">)</span> <span class="token comment">// true</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span>y <span class="token operator">==</span> d<span class="token punctuation">)</span> <span class="token comment">// false (y = "hey", d = "another")</span>
+</code></pre>
+</li>
+<li>
+<p><code>===</code> - [<strong>Strict Equal</strong>] :- similar to above <strong>Equal</strong> , however it also checks for the type of the 2 values, similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Strict_equality">javascript strict equality</a>. returns <code>Boolean (true/false)</code><br>
+Example:</p>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">if</span><span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">===</span> <span class="token string">"1"</span><span class="token punctuation">)</span> <span class="token comment">// false (different types, number | string)</span>
+<span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">"1"</span> <span class="token operator">===</span> <span class="token string">"1"</span><span class="token punctuation">)</span> <span class="token comment">// true</span>
+</code></pre>
+</li>
+<li>
+<p><code>&gt;</code> - [<strong>Greater than</strong>]  :- works only on numbers (ex: <code>l = 1</code>). returns <code>true</code> if the left operand is greater than the right operand. similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Greater_than">JavaScript greater than</a></p>
+</li>
+<li>
+<p><code>&gt;=</code> [<strong>Greater than or Equal</strong>] :- works only on numbers (ex: <code>l = 1</code>). returns <code>true</code> if the left operand is greater than or equal to the right operand, similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Greater_than_or_equal">JavaScript greater than or equal</a></p>
+</li>
+<li>
+<p><code>&lt;</code> - [<strong>Less than</strong>] :- works only on numbers (ex: <code>l = 1</code>). returns <code>true</code> if the left operand is less than the right operand. similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Less_than">JavaScript less than</a></p>
+</li>
+<li>
+<p><code>&lt;=</code> - [<strong>Less than or Equal</strong>] :-  works only on numbers (ex: <code>l = 1</code>). returns <code>true</code> if the left operand is less than or equal to the right operand</p>
+</li>
+</ol>
+<h4 id="code-inside-conditions">code inside conditions</h4>
+<p>the code inside the condition is your general tagscript you use outside of it. however every new code block must be seperated by a <code>;</code> (the parser splits code inside by <code>;</code> and joins the splited parts with <code>{code}</code> so it can create a <strong>new</strong> Interpreter to run it)</p>
+<p>Example:<br>
+<a href="/tagscript/editor.html?data=e251bWJlciA9IDF9DQp7bnVtYmVyMiA9IDJ9DQp7c3RyaW5nID0gIjEifQ0Ke3Jlc3VsdCA9ICJubyBkYXRhIn0NCntpZihudW1iZXIyID4gbnVtYmVyKToNCglyZXN1bHQgPSAibnVtYmVyMiBpcyBncmVhdGVyIHRoYW4gbnVtYmVyIDEiDQo6ZWxzZUlGKHN0cmluZyA9PT0gIjEiKToNCglyZXN1bHQgPSAic3RyaW5nIGVxdWFscyB0byAxIg0KOmVsc2VJRihudW1iZXIyID49IDIpOg0KCXJlc3VsdCA9ICJudW1iZXIyIGlzIGdyZWF0ZXIgdGhhbiAyIg0KCW51bWJlcjIgPSAzDQo6ZWxzZToNCglyZXN1bHQgPSAiZXZlcnl0aGluZyBpcyBub3JtYWwiDQo6fQ0KDQpyZXN1bHQgPj4ge3Jlc3VsdH0NCm51bWJlciA%2BPiB7bnVtYmVyfQ0KbnVtYmVyMiA%2BPiB7bnVtYmVyMn0%3D"><strong>View example</strong></a></p>
+<pre class=" language-js"><code class="prism  language-js"><span class="token punctuation">{</span>number <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>number2 <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>string <span class="token operator">=</span> <span class="token string">"1"</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span>result <span class="token operator">=</span> <span class="token string">"no data"</span><span class="token punctuation">}</span>
+<span class="token punctuation">{</span><span class="token keyword">if</span><span class="token punctuation">(</span>number2 <span class="token operator">&gt;</span> number<span class="token punctuation">)</span><span class="token punctuation">:</span>
+	result <span class="token operator">=</span> <span class="token string">"number2 is greater than number 1"</span><span class="token punctuation">;</span>
+<span class="token punctuation">:</span><span class="token function">elseIF</span><span class="token punctuation">(</span>string <span class="token operator">===</span> <span class="token string">"1"</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	result <span class="token operator">=</span> <span class="token string">"string equals to 1"</span><span class="token punctuation">;</span>
+<span class="token punctuation">:</span><span class="token function">elseIF</span><span class="token punctuation">(</span>number2 <span class="token operator">&gt;=</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+	result <span class="token operator">=</span> <span class="token string">"number2 is greater than 2"</span><span class="token punctuation">;</span>
+<span class="token punctuation">:</span><span class="token keyword">else</span><span class="token punctuation">:</span>
+	result <span class="token operator">=</span> <span class="token string">"everything is normal"</span>
+<span class="token punctuation">:</span><span class="token punctuation">}</span>
+
+result <span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>result<span class="token punctuation">}</span>
+number <span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>number<span class="token punctuation">}</span>
+number2 <span class="token operator">&gt;&gt;</span> <span class="token punctuation">{</span>number2<span class="token punctuation">}</span>
+</code></pre>
+</div>
+</body>
+
+</html>

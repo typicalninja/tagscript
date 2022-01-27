@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>static props guide</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h2 id="home"><a href="/tagscript"><strong>&lt; Home</strong></a></h2>
+<h1 id="static-data-properties">Static Data (properties)</h1>
+<ul>
+<li>In basic form static Data is a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"><code>object</code></a></li>
+<li>It contains all the data regarding a script expressions all grouped and given correct types</li>
+<li>Static Generator does <strong>NOT</strong> Care about the context (ex: <code>variable can be undefined but will still be detected as a variable</code>) , it will just output the parse data</li>
+</ul>
+<blockquote>
+<p>Static Data Generated for <strong>SAME</strong> script’s is the <strong>SAME</strong><br>
+meanwhile Static Data generated for <strong>DIFFERENT</strong> Scripts are <strong>UNIQUE</strong> between each other</p>
+</blockquote>
+<h1 id="optimizing--providing-pregenstaticdata">Optimizing / Providing preGenStaticData</h1>
+<blockquote>
+<p><code>ctx.parse(script, preGenStaticData)</code> / <code>parse(.., ..., ..., preGenStaticData)</code> both functions give you a chance<br>
+You can use this to optimize the parser as the it will create a new static Data <strong>every time</strong> a new script gets parsed if <code>preGenStaticData</code> is <strong>not</strong> present</p>
+</blockquote>
+<blockquote>
+<p>Creating a new Static Data might take few milliseconds and can be optimized if we provided a <strong>cached</strong> static object to the parser</p>
+</blockquote>
+<ul>
+<li>We can use a Database to store our static Data Object and provided it as <code>preGenStaticData</code> when the respective script needs to be run</li>
+</ul>
+<p>Example 1: <a href="https://github.com/typicalninja493/tagscript/blob/beta/examples/database/index.js">Click here (Speed test included)</a></p>
+<p>Example 2:</p>
+<pre class=" language-js"><code class="prism  language-js"><span class="token comment">// just a demo</span>
+<span class="token keyword">const</span> preGenData <span class="token operator">=</span> <span class="token function">getStaticProps</span><span class="token punctuation">(</span>script<span class="token punctuation">)</span>
+ctx<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>script<span class="token punctuation">,</span> preGenData<span class="token punctuation">)</span>
+</code></pre>
+</div>
+</body>
+
+</html>
